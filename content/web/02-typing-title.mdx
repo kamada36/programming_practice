@@ -1,0 +1,71 @@
+---
+title: 文字が1つずつ表示されるタイトル
+description: setInterval を使って、タイピング風のアニメーションを作る。
+language: html
+kind: web
+difficulty: 初級
+emoji: ⌨️
+order: 2
+minutes: 3
+starterCode: |
+  <!DOCTYPE html>
+  <html lang="ja">
+  <head>
+    <meta charset="UTF-8" />
+    <style>
+      body {
+        font-family: system-ui, sans-serif;
+        display: grid;
+        place-items: center;
+        height: 100vh;
+        margin: 0;
+        background: #2c221e;
+        color: #fdfbf7;
+      }
+      h1 { font-size: 1.8rem; }
+      .cursor { color: #d97706; }
+    </style>
+  </head>
+  <body>
+    <h1 id="title"></h1>
+
+    <script>
+      const text = "ようこそ、コード・キッチンへ。";
+      const el = document.getElementById("title");
+      let i = 0;
+
+      const timer = setInterval(() => {
+        el.textContent = text.slice(0, i);
+        el.innerHTML += '<span class="cursor">|</span>';
+        i += 1;
+        if (i > text.length) clearInterval(timer);
+      }, 120);
+    </script>
+  </body>
+  </html>
+---
+
+## 仕組み
+
+`setInterval(関数, ミリ秒)` は、一定間隔で関数を呼び続けます。
+ここでは 120 ミリ秒ごとに「文字列の先頭から `i` 文字目まで」を表示しています。
+
+```js
+el.textContent = text.slice(0, i);
+i += 1;
+if (i > text.length) clearInterval(timer);
+```
+
+`text.slice(0, i)` の `i` が 1, 2, 3... と増えることで、
+表示される文字が少しずつ伸びていきます。
+最後まで表示したら `clearInterval` でタイマーを止めます。
+
+<Callout type="warn">
+`clearInterval` を書き忘れると、タイマーが永遠に動き続けます。
+「止める条件」を必ずセットで考えるのがコツです。
+</Callout>
+
+## 試してみよう
+
+- `120` を `40` にすると、一気に速くなります。
+- `text` を好きな文章に変えてみましょう。

@@ -1,0 +1,36 @@
+---
+title: Ruby で挨拶してみる
+description: puts で出力。Ruby の読みやすさを体感する最初のレシピ。
+language: ruby
+kind: console
+difficulty: 入門
+emoji: 💎
+order: 1
+minutes: 1
+starterCode: |
+  # puts は文字を1行表示する
+  puts "こんにちは、Ruby！"
+
+  # 3.times で「3回くりかえす」
+  3.times do |i|
+    puts "#{i + 1} 杯目のコーヒー"
+  end
+---
+
+## Ruby の書き心地
+
+```ruby
+3.times do |i|
+  puts "#{i + 1} 杯目のコーヒー"
+end
+```
+
+`3.times do ... end` は「3 回くりかえす」という意味です。
+数値そのものに `.times` と書けるのが Ruby らしいところ。
+
+`"#{...}"` は **文字列の中に値を埋め込む** 書き方（式展開）です。
+`i` は 0, 1, 2 と変わるので、`i + 1` で 1, 2, 3 と表示しています。
+
+<Callout>
+`3.times` の `3` を `5` に変えると、5 行表示されます。実行して確かめてみましょう。
+</Callout>

@@ -1,0 +1,76 @@
+---
+title: ボタンを押したら文字が変わる
+description: クリックイベントを1つ書くだけ。JavaScript で画面を動かす最初の一歩。
+language: html
+kind: web
+difficulty: 入門
+emoji: 👆
+order: 1
+minutes: 2
+starterCode: |
+  <!DOCTYPE html>
+  <html lang="ja">
+  <head>
+    <meta charset="UTF-8" />
+    <style>
+      body {
+        font-family: system-ui, sans-serif;
+        display: grid;
+        place-items: center;
+        height: 100vh;
+        margin: 0;
+        background: #fdfbf7;
+      }
+      button {
+        font-size: 1.1rem;
+        padding: 0.8rem 1.6rem;
+        border: none;
+        border-radius: 12px;
+        background: #6b4423;
+        color: #fff;
+        cursor: pointer;
+      }
+      button:hover { background: #7d5230; }
+    </style>
+  </head>
+  <body>
+    <button id="btn">押してみて</button>
+
+    <script>
+      const btn = document.getElementById("btn");
+      let count = 0;
+
+      btn.addEventListener("click", () => {
+        count += 1;
+        btn.textContent = count + " 回 押したね！";
+      });
+    </script>
+  </body>
+  </html>
+---
+
+## 何をしているの？
+
+ブラウザは、ユーザーの操作を「イベント」として教えてくれます。
+このレシピでは **クリックされたとき** に動く処理を1つ登録しています。
+
+```js
+btn.addEventListener("click", () => {
+  count += 1;
+  btn.textContent = count + " 回 押したね！";
+});
+```
+
+- `document.getElementById("btn")` … HTML のボタンを JavaScript から掴む
+- `addEventListener("click", ...)` … クリックされたら中の関数を実行する
+- `btn.textContent = ...` … ボタンの表示文字を書き換える
+
+<Callout>
+`count` の初期値を `10` に変えたり、`textContent` の文言を変えたりして、
+プレビューがどう変わるか試してみましょう。
+</Callout>
+
+## 次の一歩
+
+`click` を `mouseover`（マウスを乗せたとき）に変えると、
+押さなくても反応するボタンになります。イベント名を差し替えるだけです。

@@ -1,0 +1,47 @@
+---
+title: FizzBuzz で「繰り返し」と「条件分岐」
+description: 1〜30 の数を順番に処理しながら、if で場合分けする定番練習問題。
+language: python
+kind: console
+difficulty: 初級
+emoji: 🔢
+order: 2
+minutes: 3
+starterCode: |
+  for i in range(1, 31):
+      if i % 15 == 0:
+          print("FizzBuzz")
+      elif i % 3 == 0:
+          print("Fizz")
+      elif i % 5 == 0:
+          print("Buzz")
+      else:
+          print(i)
+---
+
+## ルール
+
+1 から 30 までの数について、
+
+- 3 の倍数なら `Fizz`
+- 5 の倍数なら `Buzz`
+- 両方（＝15 の倍数）なら `FizzBuzz`
+- それ以外はその数そのもの
+
+を出力します。
+
+## ポイント
+
+```python
+for i in range(1, 31):
+    ...
+```
+
+`range(1, 31)` は 1 以上 31 未満の数を順に取り出します（31 は含みません）。
+
+`i % 3` は「`i` を 3 で割った余り」。余りが `0` なら割り切れる＝倍数です。
+**15 の判定を先に書く** のがコツで、順番を入れ替えると `FizzBuzz` が出なくなります。
+
+<Callout>
+`15` の行を一番下に移動して実行すると、何が起きるか確認してみましょう。
+</Callout>

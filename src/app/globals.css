@@ -1,0 +1,72 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/*
+ * カフェ風カラーパレット（HSL）。
+ * 温かみのあるクリーム地に、コーヒーブラウンとアンバーのアクセント。
+ */
+:root {
+  --background: 40 43% 98%; /* #FDFBF7 クリーム */
+  --surface: 0 0% 100%; /* #FFFFFF */
+  --foreground: 20 20% 14%; /* #2C221E ダークブラウン */
+  --muted: 38 32% 94%;
+  --muted-foreground: 25 12% 40%;
+  --border: 35 26% 88%;
+  --primary: 25 51% 28%; /* #6B4423 コーヒーブラウン */
+  --primary-foreground: 40 43% 98%;
+  --accent: 32 95% 44%; /* #D97706 アンバー */
+  --accent-foreground: 0 0% 100%;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --background: 24 14% 10%;
+    --surface: 24 12% 14%;
+    --foreground: 40 30% 92%;
+    --muted: 24 10% 20%;
+    --muted-foreground: 35 12% 65%;
+    --border: 24 10% 24%;
+    --primary: 32 60% 55%;
+    --primary-foreground: 24 14% 10%;
+    --accent: 32 95% 55%;
+    --accent-foreground: 24 14% 10%;
+  }
+}
+
+* {
+  border-color: hsl(var(--border));
+}
+
+body {
+  background-color: hsl(var(--background));
+  color: hsl(var(--foreground));
+  -webkit-font-smoothing: antialiased;
+}
+
+/* タイポグラフィ（@tailwindcss/typography）のカフェ調整 */
+.prose {
+  --tw-prose-body: hsl(var(--foreground) / 0.9);
+  --tw-prose-headings: hsl(var(--foreground));
+  --tw-prose-links: hsl(var(--accent));
+  --tw-prose-bold: hsl(var(--foreground));
+  --tw-prose-counters: hsl(var(--muted-foreground));
+  --tw-prose-bullets: hsl(var(--accent) / 0.6);
+  --tw-prose-quotes: hsl(var(--foreground) / 0.8);
+  --tw-prose-quote-borders: hsl(var(--accent) / 0.4);
+  --tw-prose-code: hsl(var(--primary));
+  --tw-prose-pre-bg: #1e1e1e;
+  --tw-prose-pre-code: #e5e5e5;
+  --tw-prose-hr: hsl(var(--border));
+}
+
+.prose :not(pre) > code {
+  background: hsl(var(--muted));
+  padding: 0.15em 0.4em;
+  border-radius: 0.375rem;
+  font-weight: 500;
+}
+.prose :not(pre) > code::before,
+.prose :not(pre) > code::after {
+  content: none;
+}
