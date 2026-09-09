@@ -1,0 +1,96 @@
+---
+title: プラスとマイナスで数えるカウンター
+description: 2つのボタンで1つの変数を増減し、画面に反映する。
+language: html
+kind: web
+difficulty: 初級
+emoji: 🔢
+order: 3
+minutes: 3
+starterCode: |
+  <!DOCTYPE html>
+  <html lang="ja">
+  <head>
+    <meta charset="UTF-8" />
+    <style>
+      body { font-family: system-ui, sans-serif; display: grid; place-items: center;
+             height: 100vh; margin: 0; gap: 1rem; background: #fdfbf7; }
+      #count { font-size: 3rem; font-weight: 700; color: #6b4423; }
+      .row { display: flex; gap: 0.5rem; }
+      button { font-size: 1.4rem; width: 3rem; height: 3rem; border: none;
+               border-radius: 12px; background: #6b4423; color: #fff; cursor: pointer; }
+    </style>
+  </head>
+  <body>
+    <div id="count">0</div>
+    <div class="row">
+      <button id="minus">-</button>
+      <button id="plus">+</button>
+    </div>
+
+    <script>
+      let count = 0;
+      const label = document.getElementById("count");
+
+      function render() {
+        label.textContent = count;
+      }
+
+      document.getElementById("plus").addEventListener("click", () => {
+        count += 1;
+        render();
+      });
+      document.getElementById("minus").addEventListener("click", () => {
+        count -= 1;
+        render();
+      });
+    </script>
+  </body>
+  </html>
+practiceHint: "「+」ボタンで count += 1 のところを count += 5 に変えて、5ずつ増えるカウンターにしてみよう。"
+quiz:
+  question: "「+」ボタンを押すたびに count を1増やす書き方はどれ？"
+  codeSnippet: |
+    <!DOCTYPE html>
+    <html lang="ja">
+    <head><meta charset="UTF-8" /></head>
+    <body style="height:100vh;margin:0;display:grid;place-items:center;font-family:system-ui;gap:1rem">
+      <div id="count" style="font-size:3rem;font-weight:700">0</div>
+      <button id="plus" style="font-size:1.4rem;padding:.5rem 1rem">+</button>
+      <script>
+        let count = 0;
+        document.getElementById("plus").addEventListener("click", () => {
+          count ___CHOICE___ 1;
+          document.getElementById("count").textContent = count;
+        });
+      </script>
+    </body>
+    </html>
+  options:
+    - label: "+="
+      isCorrect: true
+    - label: "=+"
+      isCorrect: false
+    - label: "++"
+      isCorrect: false
+  explanation: "count += 1 は count = count + 1 の短縮形です。=+ という演算子は存在せず、++ を使うなら count++（後ろに 1 を付けない）と書きます。"
+---
+
+## ポイント
+
+値を持つのは `count` という変数ひとつだけ。ボタンはその値を増減し、
+`render()` が「今の `count` を画面に書く」役割を持ちます。
+
+```js
+function render() {
+  label.textContent = count;
+}
+```
+
+**「状態を1か所にまとめ、表示は関数にまかせる」** のは、
+規模が大きくなっても崩れにくい書き方です。
+
+<Callout>
+`render()` の中で `label.style.color = count < 0 ? "red" : "#6b4423"` を足すと、
+マイナスのときだけ赤字にできます。
+</Callout>

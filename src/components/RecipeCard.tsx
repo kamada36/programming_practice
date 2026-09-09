@@ -1,31 +1,35 @@
 import Link from "next/link";
 import { Clock, ArrowRight } from "lucide-react";
 import { Card, CardContent } from "@/components/ui/card";
+import { recipeLevelSlug } from "@/lib/mdx";
 import type { Recipe } from "@/types/recipe";
 
 /** レシピ一覧のカード。 */
 export function RecipeCard({ recipe }: { recipe: Recipe }) {
   const { frontmatter, category, slug } = recipe;
+  const level = recipeLevelSlug(recipe);
 
   return (
     <Link
-      href={`/${category}/${slug}/`}
+      href={`/${category}/${level}/${slug}/`}
       className="group block focus-visible:outline-none"
     >
       <Card className="h-full transition-all duration-200 group-hover:-translate-y-0.5 group-hover:shadow-lg group-focus-visible:ring-2 group-focus-visible:ring-accent">
-        <CardContent className="flex h-full flex-col gap-3">
+        <CardContent className="flex h-full flex-col gap-2.5 p-4 sm:p-5">
           <div className="flex items-center gap-2">
-            <span className="text-2xl">{frontmatter.emoji ?? "📝"}</span>
+            <span className="text-xl sm:text-2xl">
+              {frontmatter.emoji ?? "📝"}
+            </span>
             <span className="rounded-full bg-muted px-2.5 py-0.5 text-xs font-medium text-muted-foreground">
               {frontmatter.difficulty}
             </span>
           </div>
 
-          <h3 className="text-base font-semibold text-foreground">
+          <h3 className="text-sm font-semibold leading-snug text-foreground sm:text-base">
             {frontmatter.title}
           </h3>
 
-          <p className="line-clamp-2 flex-1 text-sm leading-relaxed text-muted-foreground">
+          <p className="line-clamp-2 flex-1 text-xs leading-relaxed text-muted-foreground sm:text-sm">
             {frontmatter.description}
           </p>
 

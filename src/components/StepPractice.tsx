@@ -23,9 +23,9 @@ interface StepPracticeProps {
 }
 
 const STEP_META = [
-  { id: 1, label: "見本を動かす", short: "見本", icon: Eye },
-  { id: 2, label: "少し変える", short: "お題", icon: Pencil },
-  { id: 3, label: "穴埋めに挑戦", short: "挑戦", icon: Trophy },
+  { id: 1, label: "見本", icon: Eye },
+  { id: 2, label: "書き換え", icon: Pencil },
+  { id: 3, label: "挑戦", icon: Trophy },
 ] as const;
 
 /** 各ステップ下部の「戻る / 次へ」ナビゲーション。 */
@@ -37,7 +37,7 @@ function StepNav({
   next?: { label: string; onClick: () => void };
 }) {
   return (
-    <div className="mt-4 flex items-center justify-between gap-3">
+    <div className="mt-4 flex items-center justify-between gap-2">
       {back ? (
         <Button variant="secondary" onClick={back.onClick}>
           <ArrowLeft className="h-4 w-4" />
@@ -73,7 +73,9 @@ function StepHeading({
       <span className="text-xs font-bold tracking-widest text-accent">
         STEP {n}
       </span>
-      <h3 className="text-lg font-semibold text-foreground">{title}</h3>
+      <h3 className="text-base font-semibold text-foreground sm:text-lg">
+        {title}
+      </h3>
       {desc && (
         <p className="mt-0.5 text-sm leading-relaxed text-muted-foreground">
           {desc}
@@ -85,8 +87,7 @@ function StepHeading({
 
 /**
  * 機能①：1ページ内「3ステップ式 段階学習」UI。
- * Step 1（完成見本）→ Step 2（値の書き換え）→ Step 3（穴埋めクイズ）。
- * 上部のタブと、各ステップ下部の「戻る / 次へ」で自由に行き来できる。
+ * 見本 → 書き換え → 挑戦。上部タブと各ステップ下部の「戻る / 次へ」で行き来できる。
  */
 export function StepPractice({
   recipeId,
@@ -102,7 +103,7 @@ export function StepPractice({
   const [active, setActive] = useState<number>(1);
 
   return (
-    <div className="not-prose my-8">
+    <div className="not-prose my-6 sm:my-8">
       <p className="mb-2 text-xs font-semibold uppercase tracking-wider text-muted-foreground">
         3ステップで身につける
       </p>
@@ -124,7 +125,7 @@ export function StepPractice({
               aria-selected={isActive}
               onClick={() => setActive(step.id)}
               className={cn(
-                "flex flex-1 items-center justify-center gap-1.5 rounded-lg px-2 py-2 text-sm font-medium transition-colors sm:px-3",
+                "flex flex-1 items-center justify-center gap-1.5 rounded-lg px-2 py-2.5 text-sm font-medium transition-colors",
                 isActive
                   ? "bg-surface text-foreground shadow-sm"
                   : "text-muted-foreground hover:text-foreground",
@@ -140,22 +141,21 @@ export function StepPractice({
               >
                 {step.id}
               </span>
-              <Icon className="h-4 w-4 shrink-0" />
-              <span className="hidden sm:inline">{step.label}</span>
-              <span className="sm:hidden">{step.short}</span>
+              <Icon className="hidden h-4 w-4 shrink-0 sm:block" />
+              {step.label}
             </button>
           );
         })}
       </div>
 
-      {/* Step 1: 見本を動かす */}
+      {/* Step 1: 見本 */}
       <div
         className={cn("mt-5", active === 1 ? "" : "hidden")}
         role="tabpanel"
       >
         <StepHeading
           n={1}
-          title="見本を動かす"
+          title="まず見本を動かす"
           desc={
             kind === "web"
               ? "完成したコードです。「実行」を押して、どう動くか見てみよう。"
@@ -169,19 +169,19 @@ export function StepPractice({
           stdin={stdin}
         />
         <StepNav
-          next={{ label: "お題にすすむ", onClick: () => setActive(2) }}
+          next={{ label: "書き換えへ", onClick: () => setActive(2) }}
         />
       </div>
 
-      {/* Step 2: 少し変える */}
+      {/* Step 2: 書き換え */}
       <div
         className={cn("mt-5", active === 2 ? "" : "hidden")}
         role="tabpanel"
       >
         <StepHeading
           n={2}
-          title="少し変えてみよう"
-          desc="コードを1か所だけ書き換えて、結果がどう変わるか試してみよう。"
+          title="1か所だけ書き換える"
+          desc="コードを1か所いじって、結果がどう変わるか試してみよう。"
         />
         <div className="mb-3 rounded-xl border border-accent/40 bg-accent/5 px-4 py-3 text-sm leading-relaxed text-foreground">
           <span className="font-semibold text-accent">お題：</span>
@@ -195,16 +195,14 @@ export function StepPractice({
           stdin={stdin}
         />
         <StepNav
-          back={{ label: "見本にもどる", onClick: () => setActive(1) }}
+          back={{ label: "見本へ", onClick: () => setActive(1) }}
           next={
-            quiz
-              ? { label: "穴埋めに挑戦", onClick: () => setActive(3) }
-              : undefined
+            quiz ? { label: "挑戦へ", onClick: () => setActive(3) } : undefined
           }
         />
       </div>
 
-      {/* Step 3: 穴埋めに挑戦 */}
+      {/* Step 3: 挑戦 */}
       {quiz && (
         <div
           className={cn("mt-5", active === 3 ? "" : "hidden")}
@@ -223,7 +221,7 @@ export function StepPractice({
             quiz={quiz}
           />
           <StepNav
-            back={{ label: "お題にもどる", onClick: () => setActive(2) }}
+            back={{ label: "書き換えへ", onClick: () => setActive(2) }}
           />
         </div>
       )}

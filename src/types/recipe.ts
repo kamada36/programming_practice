@@ -15,7 +15,7 @@ export type RecipeLanguage =
   | "cpp";
 
 /** 難易度ラベル。 */
-export type Difficulty = "入門" | "初級" | "中級";
+export type Difficulty = "入門" | "初級" | "中級" | "上級";
 
 /** 穴埋めクイズの選択肢。 */
 export interface QuizOption {
@@ -87,4 +87,18 @@ export interface CategoryMeta {
   label: string;
   emoji: string;
   description: string;
+}
+
+/** 難易度（〜編）のメタ情報。 */
+export interface LevelMeta {
+  /** URL スラッグ（例: "intro"） */
+  slug: string;
+  /** 表示名（例: "入門編"） */
+  label: string;
+  /** frontmatter.difficulty の対応値 */
+  difficulty: Difficulty;
+  /** アイコン絵文字 */
+  emoji: string;
+  /** 一覧・トップで表示する短い説明 */
+  blurb: string;
 }

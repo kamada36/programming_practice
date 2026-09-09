@@ -1,0 +1,122 @@
+---
+title: スタート・ストップできるストップウォッチ
+description: setInterval と経過時間の計算で、動くタイマーを作る。
+language: html
+kind: web
+difficulty: 上級
+emoji: ⏱️
+order: 5
+minutes: 8
+starterCode: |
+  <!DOCTYPE html>
+  <html lang="ja">
+  <head>
+    <meta charset="UTF-8" />
+    <style>
+      body { font-family: system-ui, sans-serif; display: grid; place-items: center;
+             height: 100vh; margin: 0; gap: 1rem; background: #2c221e; color: #fdfbf7; }
+      #time { font-size: 3rem; font-variant-numeric: tabular-nums; }
+      .row { display: flex; gap: 0.5rem; }
+      button { font-size: 1rem; padding: 0.6rem 1.2rem; border: none;
+               border-radius: 10px; background: #d97706; color: #fff; cursor: pointer; }
+      button.ghost { background: transparent; border: 1px solid #d97706; color: #d97706; }
+    </style>
+  </head>
+  <body>
+    <div id="time">0.00</div>
+    <div class="row">
+      <button id="toggle">スタート</button>
+      <button id="reset" class="ghost">リセット</button>
+    </div>
+
+    <script>
+      const timeEl = document.getElementById("time");
+      const toggleBtn = document.getElementById("toggle");
+
+      let running = false;
+      let startedAt = 0;
+      let elapsed = 0;
+      let timer = null;
+
+      function show() {
+        timeEl.textContent = (elapsed / 1000).toFixed(2);
+      }
+
+      toggleBtn.addEventListener("click", () => {
+        if (running) {
+          elapsed += Date.now() - startedAt;
+          clearInterval(timer);
+          toggleBtn.textContent = "スタート";
+        } else {
+          startedAt = Date.now();
+          timer = setInterval(() => {
+            const now = elapsed + (Date.now() - startedAt);
+            timeEl.textContent = (now / 1000).toFixed(2);
+          }, 50);
+          toggleBtn.textContent = "ストップ";
+        }
+        running = !running;
+      });
+
+      document.getElementById("reset").addEventListener("click", () => {
+        clearInterval(timer);
+        running = false;
+        elapsed = 0;
+        toggleBtn.textContent = "スタート";
+        show();
+      });
+
+      show();
+    </script>
+  </body>
+  </html>
+practiceHint: "setInterval の間隔 50（ミリ秒）を 10 にすると表示がなめらかに、200 にするとカクカク更新になります。変えて試そう。"
+quiz:
+  question: "「今の時刻」をミリ秒で取得して、経過時間の計算に使う書き方はどれ？"
+  codeSnippet: |
+    <!DOCTYPE html>
+    <html lang="ja">
+    <head><meta charset="UTF-8" /></head>
+    <body style="font-family:system-ui;display:grid;place-items:center;height:100vh;margin:0;gap:1rem">
+      <div id="time" style="font-size:2.5rem">0.00</div>
+      <button id="start" style="padding:.5rem 1rem">3秒だけ計る</button>
+      <script>
+        document.getElementById("start").addEventListener("click", () => {
+          const startedAt = ___CHOICE___;
+          const timer = setInterval(() => {
+            const sec = (___CHOICE___ - startedAt) / 1000;
+            document.getElementById("time").textContent = sec.toFixed(2);
+            if (sec >= 3) clearInterval(timer);
+          }, 50);
+        });
+      </script>
+    </body>
+    </html>
+  options:
+    - label: "Date.now()"
+      isCorrect: true
+    - label: "new Date"
+      isCorrect: false
+    - label: "time.now"
+      isCorrect: false
+  explanation: "Date.now() は 1970年からの経過ミリ秒を数値で返します。開始時刻と現在時刻の差を取れば、経過時間（ミリ秒）が求まります。"
+---
+
+## 経過時間の考え方
+
+タイマーは「0.05秒ごとに数を足す」のではなく、
+**「開始時刻」と「今の時刻」の差** で経過時間を出します。
+
+```js
+startedAt = Date.now();
+// 表示のたびに…
+const now = Date.now();
+timeEl.textContent = ((now - startedAt) / 1000).toFixed(2);
+```
+
+こうすると、`setInterval` の呼び出しが多少ズレても、時間は正確なままです。
+
+<Callout>
+一時停止に対応するため、止めたときの経過を `elapsed` に足しておき、
+再開時は `elapsed + (今 - 再開時刻)` で表示しています。
+</Callout>

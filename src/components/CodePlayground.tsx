@@ -73,8 +73,8 @@ export function CodePlayground({
   }, [initial]);
 
   return (
-    <div className="not-prose my-4 rounded-2xl border border-border bg-surface p-4 shadow-card">
-      <div className="mb-3 flex items-center justify-between">
+    <div className="not-prose my-4 rounded-2xl border border-border bg-surface p-3 shadow-card sm:p-4">
+      <div className="mb-3 flex flex-wrap items-center justify-between gap-2">
         <span className="rounded-lg bg-muted px-2.5 py-1 text-xs font-medium uppercase tracking-wide text-muted-foreground">
           {language}
         </span>

@@ -9,23 +9,23 @@ export function Header() {
 
   return (
     <header className="sticky top-0 z-40 border-b border-border/70 bg-background/85 backdrop-blur">
-      <div className="mx-auto flex h-16 max-w-5xl items-center justify-between px-4">
-        <Link href="/" className="flex items-center gap-2">
-          <span className="grid h-9 w-9 place-items-center rounded-xl bg-primary text-primary-foreground">
-            <Coffee className="h-5 w-5" />
+      <div className="mx-auto flex h-14 max-w-5xl items-center justify-between gap-2 px-4 sm:h-16">
+        <Link href="/" className="flex min-w-0 items-center gap-2">
+          <span className="grid h-8 w-8 shrink-0 place-items-center rounded-xl bg-primary text-primary-foreground sm:h-9 sm:w-9">
+            <Coffee className="h-4 w-4 sm:h-5 sm:w-5" />
           </span>
-          <span className="flex flex-col leading-tight">
-            <span className="text-base font-semibold text-foreground">
+          <span className="flex min-w-0 flex-col leading-tight">
+            <span className="truncate text-sm font-semibold text-foreground sm:text-base">
               コード・キッチン
             </span>
-            <span className="text-xs text-muted-foreground">
+            <span className="hidden text-xs text-muted-foreground sm:block">
               1分で動かす、実用レシピ
             </span>
           </span>
         </Link>
 
-        <div className="flex items-center gap-2">
-          <nav className="hidden items-center gap-1 sm:flex">
+        <div className="flex shrink-0 items-center gap-1 sm:gap-2">
+          <nav className="hidden items-center gap-1 md:flex">
             {CATEGORIES.map((c) => (
               <Link
                 key={c.slug}
