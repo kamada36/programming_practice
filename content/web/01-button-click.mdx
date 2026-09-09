@@ -47,6 +47,39 @@ starterCode: |
     </script>
   </body>
   </html>
+practiceHint: "count の初期値 0 を 10 に変えたり、btn.textContent の文言を「ありがとう！」などに書き換えたりして、プレビューの変化を確かめてみよう。"
+quiz:
+  question: "ボタンを押したときに、見出しの文字を書き換えるプロパティとして正しいものを選ぼう！"
+  codeSnippet: |
+    <!DOCTYPE html>
+    <html lang="ja">
+    <head>
+      <meta charset="UTF-8" />
+      <style>
+        body { font-family: system-ui, sans-serif; display: grid; place-items: center;
+               height: 100vh; margin: 0; gap: 1rem; background: #fdfbf7; }
+        button { font-size: 1.1rem; padding: .8rem 1.6rem; border: none;
+                 border-radius: 12px; background: #6b4423; color: #fff; cursor: pointer; }
+      </style>
+    </head>
+    <body>
+      <h1 id="title">こんにちは！</h1>
+      <button onclick="changeText()">押してみてね</button>
+      <script>
+        function changeText() {
+          document.querySelector('#title').___CHOICE___ = '完成！';
+        }
+      </script>
+    </body>
+    </html>
+  options:
+    - label: "innerText"
+      isCorrect: true
+    - label: "backgroundColor"
+      isCorrect: false
+    - label: "value"
+      isCorrect: false
+  explanation: "画面の文字要素を書き換えるときは innerText（または textContent）を使います。backgroundColor は背景色、value は入力欄の値を指すプロパティです。"
 ---
 
 ## 何をしているの？

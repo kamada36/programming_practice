@@ -9,7 +9,7 @@ import {
   getRecipe,
 } from "@/lib/mdx";
 import { mdxComponents } from "@/components/mdx";
-import { CodePlayground } from "@/components/CodePlayground";
+import { StepPractice } from "@/components/StepPractice";
 
 interface PageProps {
   params: { category: string; slug: string };
@@ -73,12 +73,16 @@ export default function RecipePage({ params }: PageProps) {
         </p>
       </header>
 
-      {/* まず動かす: プレイグラウンド */}
-      <CodePlayground
+      {/* 3ステップ式 段階学習（見る → 少し変える → 挑戦する） */}
+      <StepPractice
+        recipeId={`${recipe.category}/${recipe.slug}`}
+        title={frontmatter.title}
         language={frontmatter.language}
         kind={frontmatter.kind}
-        starterCode={frontmatter.starterCode}
+        initialCode={frontmatter.starterCode}
         stdin={frontmatter.stdin}
+        practiceHint={frontmatter.practiceHint}
+        quiz={frontmatter.quiz}
       />
 
       {/* 解説 */}

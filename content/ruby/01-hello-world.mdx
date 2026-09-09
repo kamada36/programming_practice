@@ -15,6 +15,23 @@ starterCode: |
   3.times do |i|
     puts "#{i + 1} 杯目のコーヒー"
   end
+practiceHint: "3.times の 3 を 5 に変えると5行表示されます。\"#{i + 1} 杯目のコーヒー\" の文言も好きに変えてみよう。"
+quiz:
+  question: "文字を1行表示する Ruby の命令はどれ？"
+  codeSnippet: |
+    ___CHOICE___ "こんにちは、Ruby！"
+
+    3.times do |i|
+      ___CHOICE___ "#{i + 1} 杯目のコーヒー"
+    end
+  options:
+    - label: "puts"
+      isCorrect: true
+    - label: "print"
+      isCorrect: false
+    - label: "console.log"
+      isCorrect: false
+  explanation: "puts は文字列を表示して最後に改行します。print も表示できますが改行しないので、行が続いてしまいます。console.log は JavaScript の命令です。"
 ---
 
 ## Ruby の書き心地

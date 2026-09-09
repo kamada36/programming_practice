@@ -43,6 +43,42 @@ starterCode: |
     </script>
   </body>
   </html>
+practiceHint: "120（ミリ秒）を 40 にすると一気に速く、300 にするとゆっくりになります。text の文章も好きな言葉に変えてみよう。"
+quiz:
+  question: "一定間隔で関数を呼び続けて、文字を1つずつ増やしていく命令はどれ？"
+  codeSnippet: |
+    <!DOCTYPE html>
+    <html lang="ja">
+    <head>
+      <meta charset="UTF-8" />
+      <style>
+        body { font-family: system-ui, sans-serif; display: grid; place-items: center;
+               height: 100vh; margin: 0; background: #2c221e; color: #fdfbf7; }
+        h1 { font-size: 1.6rem; }
+      </style>
+    </head>
+    <body>
+      <h1 id="title"></h1>
+      <script>
+        const text = "ようこそ、コード・キッチンへ。";
+        const el = document.getElementById("title");
+        let i = 0;
+        const timer = ___CHOICE___(() => {
+          el.textContent = text.slice(0, i);
+          i += 1;
+          if (i > text.length) clearInterval(timer);
+        }, 120);
+      </script>
+    </body>
+    </html>
+  options:
+    - label: "setInterval"
+      isCorrect: true
+    - label: "setTimeout"
+      isCorrect: false
+    - label: "clearInterval"
+      isCorrect: false
+  explanation: "setInterval(関数, ミリ秒) は指定間隔で関数を繰り返し呼びます。setTimeout は1回だけ、clearInterval はタイマーを止める命令です。"
 ---
 
 ## 仕組み

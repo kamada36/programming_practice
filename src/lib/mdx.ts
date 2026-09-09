@@ -55,6 +55,11 @@ function readRecipeFile(category: string, fileName: string): Recipe {
     ...data,
   } as RecipeFrontmatter;
 
+  // `initialCode` は `starterCode` の別名として受け付ける。
+  if (!frontmatter.starterCode && frontmatter.initialCode) {
+    frontmatter.starterCode = frontmatter.initialCode;
+  }
+
   return {
     slug: fileNameToSlug(fileName),
     category,

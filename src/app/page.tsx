@@ -1,12 +1,19 @@
 import { Sparkles, Zap, Coffee } from "lucide-react";
-import { CATEGORIES, getRecipesByCategory } from "@/lib/mdx";
+import { CATEGORIES, getAllRecipes, getRecipesByCategory } from "@/lib/mdx";
 import { RecipeCard } from "@/components/RecipeCard";
+import { StampCard } from "@/components/StampCard";
 
 export default function HomePage() {
   const sections = CATEGORIES.map((category) => ({
     category,
     recipes: getRecipesByCategory(category.slug),
   })).filter((s) => s.recipes.length > 0);
+
+  const stampRecipes = getAllRecipes().map((r) => ({
+    id: `${r.category}/${r.slug}`,
+    title: r.frontmatter.title,
+    emoji: r.frontmatter.emoji,
+  }));
 
   return (
     <div className="mx-auto max-w-5xl px-4">
@@ -41,6 +48,9 @@ export default function HomePage() {
           </span>
         </div>
       </section>
+
+      {/* スタンプカード（進捗） */}
+      <StampCard recipes={stampRecipes} />
 
       {/* カテゴリ別レシピ一覧 */}
       {sections.map(({ category, recipes }) => (
