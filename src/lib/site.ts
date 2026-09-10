@@ -9,8 +9,8 @@ export const BLOG = {
   name: "Resilencer Cafe",
   /** ブログ URL */
   url: "https://resilient-cer.com",
-  /** 運営者名 */
-  author: "鎌田",
+  /** 運営者の呼び名（本名は非公表） */
+  author: "レジサン",
   /** 記事末尾プロフィールの短い自己紹介 */
   authorBio:
     "10年の製造業からIT転職した経験をもとに、挫折しないWeb学習法をブログで配信中。",

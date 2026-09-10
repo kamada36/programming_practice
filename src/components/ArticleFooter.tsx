@@ -12,7 +12,7 @@ export function ArticleFooter() {
         className="grid h-10 w-10 shrink-0 place-items-center rounded-full bg-primary text-base font-bold text-primary-foreground"
         aria-hidden
       >
-        鎌
+        レ
       </span>
       <div className="min-w-0">
         <p className="text-sm font-semibold text-foreground">

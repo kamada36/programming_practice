@@ -69,7 +69,7 @@ src/types/recipe.ts                  型定義
 | 場所 | コンポーネント | 内容 |
 | --- | --- | --- |
 | 記事最下部 | `NextStepCard` | ベージュの「読み物」カード。frontmatter `nextStep` があればその関連記事、無ければ既定のブログ案内 |
-| その直下 | `ArticleFooter` | 運営者（鎌田 / Resilencer Cafe）の小さなプロフィール＋テキストリンク |
+| その直下 | `ArticleFooter` | 運営者（レジサン / Resilencer Cafe。本名は非公表）の小さなプロフィール＋テキストリンク |
 | ヘッダー右端 | `Header` | 「☕ Blog」の控えめなリンク |
 
 ブログの定数・既定文言・`nextStep` 解決は `src/lib/site.ts`。
