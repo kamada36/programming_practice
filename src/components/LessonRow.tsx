@@ -3,7 +3,6 @@
 import Link from "next/link";
 import { Check, ChevronRight } from "lucide-react";
 import { useClearedIds } from "@/hooks/useProgress";
-import { levelTone } from "@/lib/catalog";
 import { cn } from "@/lib/utils";
 
 export interface LessonRowData {
@@ -24,19 +23,11 @@ export interface LessonRowData {
 
 /**
  * 一覧の1行。左端にクリア済みチェック（枠の外）、その内側に通し番号（消えない）、
- * タイトル全文、難易度色ドット。行全体がリンク。
+ * タイトル全文。行全体がリンク。難易度は上の見出しで分かるので行には出さない。
  */
-export function LessonRow({
-  id,
-  href,
-  title,
-  difficulty,
-  levelSlug,
-  step,
-}: LessonRowData) {
+export function LessonRow({ id, href, title, step }: LessonRowData) {
   const cleared = useClearedIds();
   const done = cleared.includes(id);
-  const tone = levelTone(levelSlug);
 
   return (
     <Link
@@ -67,11 +58,6 @@ export function LessonRow({
         {title}
       </span>
 
-      <span
-        className={cn("h-1.5 w-1.5 shrink-0 rounded-full", tone.dot)}
-        title={difficulty}
-        aria-hidden
-      />
       <ChevronRight className="h-4 w-4 shrink-0 text-muted-foreground/40 transition-transform group-hover:translate-x-0.5 group-hover:text-accent" />
     </Link>
   );
