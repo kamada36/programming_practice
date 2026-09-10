@@ -9,6 +9,13 @@ const nextConfig = {
     unoptimized: true,
   },
   reactStrictMode: true,
+  experimental: {
+    // ビルド最適化（page optimization / build traces）時のメモリ急増を抑える。
+    // Worker スレッドを無効化し、並列度を 1 に絞ることで Vercel の
+    // メモリ上限内でビルドを完了させる。
+    workerThreads: false,
+    cpus: 1,
+  },
 };
 
 export default nextConfig;
