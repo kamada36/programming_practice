@@ -18,6 +18,7 @@ import { StepPractice } from "@/components/StepPractice";
 import { LessonNav } from "@/components/LessonNav";
 import { NextStepCard } from "@/components/NextStepCard";
 import { ArticleFooter } from "@/components/ArticleFooter";
+import { SponsoredPlaceholder } from "@/components/SponsoredPlaceholder";
 import { resolveNextStep } from "@/lib/site";
 
 interface PageProps {
@@ -116,6 +117,13 @@ export default function RecipePage({ params }: PageProps) {
         <MDXRemote source={content} components={mdxComponents} />
       </div>
 
+      {/* 【仮】広告の位置イメージ・候補A：解説の直後 */}
+      <SponsoredPlaceholder
+        variant="banner"
+        note="候補A：記事（解説）を読み終えた直後。「次のメニュー」の上"
+        className="mt-8"
+      />
+
       {/* 学習の続き（次のメニュー等） */}
       <LessonNav
         currentId={recipeId(recipe)}
@@ -145,6 +153,12 @@ export default function RecipePage({ params }: PageProps) {
           href={nextStep.href}
         />
         <ArticleFooter />
+
+        {/* 【仮】広告の位置イメージ・候補B：フッター（ブログ案内・プロフィール）の下 */}
+        <SponsoredPlaceholder
+          variant="banner"
+          note="候補B：ページ最下部。ブログ案内・運営者プロフィールの下"
+        />
       </div>
     </article>
   );
