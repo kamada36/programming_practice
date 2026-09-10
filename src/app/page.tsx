@@ -22,7 +22,7 @@ export default function HomePage() {
   return (
     <div className="mx-auto max-w-4xl px-4">
       {/* ヒーロー */}
-      <section className="py-10 text-center sm:py-14">
+      <section className="overflow-x-clip py-10 text-center sm:py-14">
         <span className="hero-rise hero-float relative inline-flex items-center gap-1.5 rounded-full border border-border bg-surface px-3 py-1 text-xs font-medium text-muted-foreground">
           <span className="relative">
             <Coffee className="h-3.5 w-3.5" />
@@ -37,21 +37,22 @@ export default function HomePage() {
           </span>
           環境構築ゼロ・完全無料
         </span>
-        <div className="relative mx-auto mt-4 max-w-2xl sm:mt-5">
-          <span className="hero-ripple" aria-hidden>
-            <span className="hero-drip" />
-            <i />
-            <i />
-            <i />
+        <h1
+          className="hero-rise mx-auto mt-4 max-w-2xl text-2xl font-bold leading-tight text-foreground sm:mt-5 sm:text-4xl"
+          style={{ animationDelay: "0.25s" }}
+        >
+          ゆっくり一杯、
+          <span className="hero-accent text-accent">
+            コードの練習
+            <span className="hero-ripple" aria-hidden>
+              <span className="hero-drip" />
+              <i />
+              <i />
+              <i />
+            </span>
           </span>
-          <h1
-            className="hero-rise relative z-10 text-2xl font-bold leading-tight text-foreground sm:text-4xl"
-            style={{ animationDelay: "0.25s" }}
-          >
-            ゆっくり一杯、
-            <span className="hero-accent text-accent">コードの練習</span>。
-          </h1>
-        </div>
+          。
+        </h1>
         <p
           className="hero-rise mx-auto mt-3 max-w-xl text-sm leading-relaxed text-muted-foreground sm:mt-4 sm:text-base"
           style={{ animationDelay: "0.5s" }}
