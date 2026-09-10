@@ -14,7 +14,19 @@
 | コンテンツ | MDX + Frontmatter（`gray-matter` + `next-mdx-remote/rsc`） |
 | エディタ | `@monaco-editor/react`（CDN ローダー） |
 | 実行 | Web: `iframe` srcDoc / コンソール言語: Piston API（クライアントから直接） |
-| ホスティング | Netlify Free Plan（`netlify.toml`、`out` を配信・関数なし） |
+| ホスティング | 静的ホスティング（本番: Netlify / 開発中: Vercel、いずれも `out` を配信・関数なし） |
+
+## デプロイ
+
+`output: 'export'` による純粋な静的サイトなので、Netlify / Vercel どちらでもそのまま配信できる。
+ビルドコマンド・公開ディレクトリ（`out`）は各サービスの管理画面で設定する。
+
+| 項目 | Netlify | Vercel |
+| --- | --- | --- |
+| 設定ファイル | `netlify.toml` | `vercel.json` |
+| セキュリティヘッダー | `[[headers]]` | `headers` |
+| 404 | `/404.html` へのリダイレクト設定 | `404.html` を自動配信 |
+| Next ランタイム無効化 | `NETLIFY_NEXT_PLUGIN_SKIP=true` | `output: 'export'` で自動的に静的配信 |
 
 ## 開発
 

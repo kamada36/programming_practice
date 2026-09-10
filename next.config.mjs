@@ -1,6 +1,6 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
-  // Netlify Free Plan での完全無料運用のため静的HTML出力
+  // 完全無料の静的ホスティング（Netlify / Vercel いずれも可）のため静的HTML出力
   output: "export",
   // 静的ホスティングでの相対リンク解決を安定させる
   trailingSlash: true,
