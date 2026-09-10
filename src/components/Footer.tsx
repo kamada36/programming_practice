@@ -12,8 +12,8 @@ export function Footer() {
               コード・カフェ
             </p>
             <p className="mt-2 text-sm leading-relaxed text-muted-foreground">
-              環境構築なしで、ブラウザだけでコードを試せる
-              入門向けのメニュー集です。
+              環境構築なし。ブラウザだけでコードを試せる、
+              初心者向けのサイトです。
             </p>
           </div>
 
@@ -23,7 +23,7 @@ export function Footer() {
               href="/"
               className="text-muted-foreground transition-colors hover:text-foreground"
             >
-              メニュー表
+              メニュー一覧
             </Link>
             <a
               href="https://resilient-cer.com"
@@ -31,7 +31,7 @@ export function Footer() {
               rel="noopener noreferrer"
               className="inline-flex items-center gap-1 text-muted-foreground transition-colors hover:text-foreground"
             >
-              メインブログ resilient-cer.com
+              ブログ（resilient-cer.com）
               <ExternalLink className="h-3.5 w-3.5" />
             </a>
           </div>

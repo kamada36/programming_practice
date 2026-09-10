@@ -35,15 +35,11 @@ export function StampCard({ groups }: { groups: StampGroup[] }) {
       className="scroll-mt-24 rounded-xl border border-border/70 bg-surface px-4 py-3"
     >
       <div className="flex items-center justify-between gap-2">
-        <h2 className="flex items-center gap-1.5 text-xs font-semibold text-muted-foreground">
-          <span aria-hidden>🎫</span>
+        <h2 className="text-xs font-semibold text-muted-foreground">
           スタンプカード
-          <span className="font-normal text-muted-foreground/70">
-            （おまけ）
-          </span>
         </h2>
         <span className="shrink-0 text-xs tabular-nums text-muted-foreground">
-          計 <span className="font-semibold text-foreground">{done}</span> / {total}
+          <span className="font-semibold text-foreground">{done}</span> / {total}
         </span>
       </div>
 

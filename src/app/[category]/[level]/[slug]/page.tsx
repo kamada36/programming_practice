@@ -113,13 +113,13 @@ export default function RecipePage({ params }: PageProps) {
           className="inline-flex items-center gap-1.5 text-sm font-medium text-accent transition-colors hover:text-accent/80"
         >
           <ArrowLeft className="h-4 w-4" />
-          {category.shortLabel} {level.label}の一覧へ
+          {category.shortLabel} {level.label}の一覧
         </Link>
         <Link
           href={`/${category.slug}/`}
           className="inline-flex items-center gap-1.5 text-sm font-medium text-muted-foreground transition-colors hover:text-foreground"
         >
-          {category.shortLabel} のメニュー表
+          {category.shortLabel} のメニュー
         </Link>
       </div>
     </article>

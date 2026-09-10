@@ -105,7 +105,7 @@ export function StepPractice({
   return (
     <div className="not-prose my-6 sm:my-8">
       <p className="mb-2 text-xs font-semibold uppercase tracking-wider text-muted-foreground">
-        3ステップで、試して味わう
+3つのステップ
       </p>
 
       {/* ステップ切り替えタブ（セグメントコントロール風） */}

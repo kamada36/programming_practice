@@ -30,34 +30,34 @@ export default function HomePage() {
           方が早い。
         </h1>
         <p className="mx-auto mt-3 max-w-xl text-sm leading-relaxed text-muted-foreground sm:mt-4 sm:text-base">
-          ブラウザだけで完結する、実用コードのメニュー表。
-          気になった一品を選んで、その場で書き換えて、動きを味わえます。
+          ブラウザだけで完結。気になったコードを選んで、書き換えて、
+          その場で動かせます。スマホでもどうぞ。
         </p>
 
         <div className="mx-auto mt-6 flex max-w-md flex-wrap justify-center gap-x-5 gap-y-2 text-xs text-muted-foreground sm:mt-7 sm:text-sm">
           <span className="inline-flex items-center gap-1.5">
             <Zap className="h-4 w-4 text-accent" />
-            1分で試せる
+            1分で動く
           </span>
           <span className="inline-flex items-center gap-1.5">
             <Sparkles className="h-4 w-4 text-accent" />
-            その場で書き換え
+            自由に書き換え
           </span>
           <span className="inline-flex items-center gap-1.5">
             <Coffee className="h-4 w-4 text-accent" />
-            インストール不要
+            登録・インストール不要
           </span>
         </div>
       </section>
 
-      {/* 言語を選ぶ */}
+      {/* 言語 */}
       <section className="pb-4">
         <div className="mb-4 flex items-baseline justify-between gap-3">
           <h2 className="text-lg font-semibold text-foreground sm:text-xl">
-            まず、言語を選ぶ
+            言語
           </h2>
           <p className="text-xs text-muted-foreground sm:text-sm">
-            全 {totalMenus} メニュー
+            全 {totalMenus} 品
           </p>
         </div>
         <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-3 sm:gap-4">
@@ -82,35 +82,24 @@ export default function HomePage() {
         <StampCard groups={stampGroups} />
       </div>
 
-      {/* カテゴリ別カリキュラム */}
+      {/* 言語ごとのメニュー */}
       {catalog.map(({ category, levels }) => (
         <section
           key={category.slug}
           id={category.slug}
           className="scroll-mt-24 border-t border-border/60 py-8 sm:py-10"
         >
-          <div className="mb-5 flex items-start justify-between gap-3">
-            <div className="min-w-0">
-              <h2 className="flex items-center gap-2 text-lg font-semibold text-foreground sm:text-xl">
-                <span className="text-2xl" aria-hidden>
-                  {category.emoji}
-                </span>
-                {category.shortLabel}
-              </h2>
-              <p className="mt-1 text-sm leading-relaxed text-muted-foreground">
-                {category.description}
-              </p>
-            </div>
-            <Link
-              href={`/${category.slug}/`}
-              className="mt-1 inline-flex shrink-0 items-center gap-1 rounded-lg border border-border bg-surface px-3 py-1.5 text-xs font-medium text-foreground transition-colors hover:bg-muted sm:text-sm"
-            >
-              メニュー表
-              <ArrowRight className="h-3.5 w-3.5" />
-            </Link>
-          </div>
+          <h2 className="flex items-center gap-2 text-lg font-semibold text-foreground sm:text-xl">
+            <span className="text-2xl" aria-hidden>
+              {category.emoji}
+            </span>
+            {category.shortLabel}
+          </h2>
+          <p className="mt-1 max-w-md text-sm leading-relaxed text-muted-foreground">
+            {category.description}
+          </p>
 
-          <div className="space-y-6">
+          <div className="mt-5 space-y-6">
             {levels.map(({ level, recipes: levelRecipes }) => (
               <LessonGroup
                 key={level.slug}
@@ -119,16 +108,24 @@ export default function HomePage() {
               />
             ))}
           </div>
+
+          <Link
+            href={`/${category.slug}/`}
+            className="mt-6 inline-flex items-center gap-1 text-sm font-medium text-accent transition-colors hover:text-accent/80"
+          >
+            {category.shortLabel} のメニューをすべて見る
+            <ArrowRight className="h-3.5 w-3.5" />
+          </Link>
         </section>
       ))}
 
-      {/* レベルの説明 */}
+      {/* レベルの目安 */}
       <section className="border-t border-border/60 py-8 sm:py-10">
         <h2 className="text-lg font-semibold text-foreground sm:text-xl">
-          4つのレベル
+          レベルの目安
         </h2>
         <p className="mt-1 text-sm text-muted-foreground">
-          どの言語も同じ4段階。今の自分に合うところから始められます。
+          どの言語も4段階。今の自分に合うレベルから始めてください。
         </p>
         <dl className="mt-4 grid gap-3 sm:grid-cols-2">
           {LEVELS.map((level) => (
