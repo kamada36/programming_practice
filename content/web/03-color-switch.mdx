@@ -1,0 +1,88 @@
+---
+title: ボタンで背景色を切り替える
+description: クリックで style を書き換えて、画面の見た目をその場で変える。
+language: html
+kind: web
+difficulty: 入門
+emoji: 🎨
+order: 3
+minutes: 2
+starterCode: |
+  <!DOCTYPE html>
+  <html lang="ja">
+  <head>
+    <meta charset="UTF-8" />
+    <style>
+      body {
+        font-family: system-ui, sans-serif;
+        display: grid;
+        place-items: center;
+        height: 100vh;
+        margin: 0;
+        transition: background 0.3s;
+      }
+      button {
+        font-size: 1.1rem;
+        padding: 0.8rem 1.6rem;
+        border: none;
+        border-radius: 12px;
+        background: #6b4423;
+        color: #fff;
+        cursor: pointer;
+      }
+    </style>
+  </head>
+  <body>
+    <button id="btn">色を変える</button>
+
+    <script>
+      const colors = ["#fdfbf7", "#ffe8cc", "#d0ebff", "#e6fcf5"];
+      let i = 0;
+
+      document.getElementById("btn").addEventListener("click", () => {
+        i = (i + 1) % colors.length;
+        document.body.style.background = colors[i];
+      });
+    </script>
+  </body>
+  </html>
+practiceHint: "colors 配列の色コード（例：\"#d0ebff\"）を好きな色に変えてみよう。要素を増やしてもOK。"
+quiz:
+  question: "body の背景色を JavaScript から変えるとき、正しい書き方はどれ？"
+  codeSnippet: |
+    <!DOCTYPE html>
+    <html lang="ja">
+    <head><meta charset="UTF-8" /></head>
+    <body style="height:100vh;margin:0;font-family:system-ui;display:grid;place-items:center">
+      <button id="btn">色を変える</button>
+      <script>
+        document.getElementById("btn").addEventListener("click", () => {
+          document.body.___CHOICE___.background = "#ffe8cc";
+        });
+      </script>
+    </body>
+    </html>
+  options:
+    - label: "style"
+      isCorrect: true
+    - label: "color"
+      isCorrect: false
+    - label: "css"
+      isCorrect: false
+  explanation: "要素の見た目を JavaScript から変えるときは element.style.プロパティ名 = 値 と書きます。background や color はその下にぶら下がるプロパティです。"
+---
+
+## やっていること
+
+`document.body.style.background = "..."` で、`<body>` の背景色を直接書き換えています。
+
+```js
+i = (i + 1) % colors.length;
+document.body.style.background = colors[i];
+```
+
+`(i + 1) % 配列の長さ` は「次の番号。最後まで行ったら 0 に戻る」という定番の書き方です。
+
+<Callout>
+`style.background` を `style.color` に変えると、今度は文字色が変わります。
+</Callout>

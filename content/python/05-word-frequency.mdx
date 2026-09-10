@@ -1,0 +1,64 @@
+---
+title: 文章に出てくる単語を数える
+description: 辞書（dict）を使って、単語ごとの出現回数を集計する。
+language: python
+kind: console
+difficulty: 上級
+emoji: 🔠
+order: 4
+minutes: 8
+starterCode: |
+  text = "coffee tea coffee milk tea coffee water tea milk"
+
+  counts = {}
+  for word in text.split():
+      counts[word] = counts.get(word, 0) + 1
+
+  # 出現回数の多い順に並べて表示
+  for word, n in sorted(counts.items(), key=lambda pair: pair[1], reverse=True):
+      print(f"{word}: {n}")
+practiceHint: "text の文章に単語を足したり、同じ単語を増やしたりして、集計結果と並び順がどう変わるか確かめよう。"
+quiz:
+  question: "まだ辞書に無いキーでも、初回を 0 として 1 を足す書き方はどれ？"
+  codeSnippet: |
+    text = "a b a c a b"
+    counts = {}
+    for word in text.split():
+        counts[word] = ___CHOICE___ + 1
+    print(counts)
+  options:
+    - label: "counts.get(word, 0)"
+      isCorrect: true
+    - label: "counts[word]"
+      isCorrect: false
+    - label: "counts.value(word)"
+      isCorrect: false
+  explanation: "counts[word] は、キーがまだ無いと KeyError で止まります。counts.get(word, 0) なら「無ければ 0」を返すので、初回でも安全に足せます。"
+---
+
+## 辞書でカウントする
+
+`{}` は **辞書（dict）**。「キー → 値」で情報を持ちます。
+ここでは「単語 → 出現回数」です。
+
+```python
+counts[word] = counts.get(word, 0) + 1
+```
+
+- `counts.get(word, 0)` … その単語の今の回数。無ければ `0`
+- そこに `+ 1` して入れ直す
+
+## 多い順に並べる
+
+```python
+sorted(counts.items(), key=lambda pair: pair[1], reverse=True)
+```
+
+`counts.items()` は `("coffee", 3)` のようなペアの並び。
+`key=lambda pair: pair[1]` で「ペアの2番目（＝回数）」を基準に、
+`reverse=True` で大きい順に並べます。
+
+<Callout>
+`text.split()` は空白で文字列を区切ってリストにします。
+`"a,b,c".split(",")` のように区切り文字も指定できます。
+</Callout>

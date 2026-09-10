@@ -1,0 +1,58 @@
+---
+title: 変数に入れて、あとから使う
+description: 文字列・数値を変数に入れ、f文字列で組み立てる基本。
+language: python
+kind: console
+difficulty: 入門
+emoji: 📦
+order: 3
+minutes: 2
+starterCode: |
+  # 変数 = 値 で、値に名前をつける
+  name = "コーヒー"
+  price = 480
+  cups = 3
+
+  total = price * cups
+
+  # f"..." の中では {変数} がそのまま値に置き換わる
+  print(f"{name} を {cups} 杯で {total} 円です")
+practiceHint: "price を 480 から 550 に、cups を 3 から 5 に変えて実行し、合計金額の変化を見てみよう。"
+quiz:
+  question: "変数の中身を文字列に埋め込むには、どの書き方が正しい？"
+  codeSnippet: |
+    name = "コーヒー"
+    cups = 3
+    print(___CHOICE___)
+  options:
+    - label: "f\"{name} を {cups} 杯\""
+      isCorrect: true
+    - label: "\"{name} を {cups} 杯\""
+      isCorrect: false
+    - label: "\"name を cups 杯\""
+      isCorrect: false
+  explanation: "文字列の前に f を付けた f\"...\"（f文字列）の中でだけ、{変数名} が値に置き換わります。f が無いと、ただの {name} という文字がそのまま表示されます。"
+---
+
+## 変数と f文字列
+
+`=` の左に名前、右に値を書くと、その名前で値を使い回せます。
+
+```python
+price = 480
+cups = 3
+total = price * cups   # 1440
+```
+
+表示するときは **f文字列** が便利です。
+
+```python
+print(f"合計 {total} 円")
+```
+
+`f"..."` の `{ }` の中には、変数だけでなく `{price * cups}` のような式も書けます。
+
+<Callout>
+`cups = "3"`（クォート付き）にすると `price * cups` がエラーになります。
+数として計算したい値は、クォートを付けずに書きます。
+</Callout>

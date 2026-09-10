@@ -1,0 +1,61 @@
+---
+title: ハッシュでメニュー表を作る
+description: 「名前 => 値段」のハッシュを回して、合計金額を計算する。
+language: ruby
+kind: console
+difficulty: 中級
+emoji: 📋
+order: 3
+minutes: 5
+starterCode: |
+  menu = {
+    "ブレンド" => 480,
+    "カフェラテ" => 520,
+    "モカ" => 560,
+  }
+
+  # キーと値をペアで取り出す
+  menu.each do |name, price|
+    puts "#{name.ljust(10, '　')} #{price} 円"
+  end
+
+  total = menu.values.sum
+  puts "-" * 20
+  puts "全部で #{total} 円（平均 #{total / menu.size} 円）"
+practiceHint: "menu に新しいドリンクを1行足してみよう（例：\"ダーク\" => 500,）。合計と平均が変わります。"
+quiz:
+  question: "ハッシュ menu の「値（値段）」だけを全部合計する式はどれ？"
+  codeSnippet: |
+    menu = { "ブレンド" => 480, "カフェラテ" => 520, "モカ" => 560 }
+    total = menu.___CHOICE___.sum
+    puts total
+  options:
+    - label: "values"
+      isCorrect: true
+    - label: "keys"
+      isCorrect: false
+    - label: "each"
+      isCorrect: false
+  explanation: "menu.values は値だけを並べた配列（[480, 520, 560]）を返すので、.sum で合計できます。menu.keys はキー側（ドリンク名）の配列です。"
+---
+
+## ハッシュの回し方
+
+`{ "キー" => 値 }` がハッシュ。`each` はキーと値をペアで渡してきます。
+
+```ruby
+menu.each do |name, price|
+  puts "#{name}: #{price} 円"
+end
+```
+
+- `menu.keys` … キーだけの配列
+- `menu.values` … 値だけの配列
+- `menu.size` … 件数
+
+だから合計は `menu.values.sum`、平均は `menu.values.sum / menu.size` です。
+
+<Callout>
+`name.ljust(10, '　')` は「全角スペースで10文字幅にそろえる」指定です。
+表示をきれいに整列させるときに使います。
+</Callout>

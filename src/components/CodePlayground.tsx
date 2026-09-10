@@ -1,6 +1,6 @@
 "use client";
 
-import { useCallback, useMemo, useState } from "react";
+import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import { Play, RotateCcw, Loader2 } from "lucide-react";
 import { CodeEditor } from "@/components/CodeEditor";
 import { WebPreview } from "@/components/WebPreview";
@@ -19,7 +19,7 @@ interface CodePlaygroundProps {
 
 /**
  * エディタと実行結果を統括するメインコンポーネント。
- * - web: iframe でリアルタイムプレビュー
+ * - web: iframe プレビュー（編集で自動反映 + 「実行」で再実行）
  * - console: Piston API でクライアントサイド実行
  */
 export function CodePlayground({
@@ -36,9 +36,22 @@ export function CodePlayground({
   const [result, setResult] = useState<PistonResult | null>(null);
   const [loading, setLoading] = useState(false);
 
+  // web プレビュー用: 表示中の HTML と、再実行を強制する nonce
+  const [previewHtml, setPreviewHtml] = useState(initial);
+  const [reloadKey, setReloadKey] = useState(0);
+  const debounce = useRef<ReturnType<typeof setTimeout>>();
+
   const isWeb = kind === "web";
 
-  const handleRun = useCallback(async () => {
+  // 編集のたびに 300ms デバウンスでプレビューへ反映する
+  useEffect(() => {
+    if (!isWeb) return;
+    clearTimeout(debounce.current);
+    debounce.current = setTimeout(() => setPreviewHtml(code), 300);
+    return () => clearTimeout(debounce.current);
+  }, [code, isWeb]);
+
+  const handleRunConsole = useCallback(async () => {
     setLoading(true);
     setResult(null);
     const r = await runOnPiston(language, code, stdin);
@@ -46,14 +59,22 @@ export function CodePlayground({
     setLoading(false);
   }, [language, code, stdin]);
 
+  const handleRunWeb = useCallback(() => {
+    clearTimeout(debounce.current);
+    setPreviewHtml(code);
+    setReloadKey((k) => k + 1);
+  }, [code]);
+
   const handleReset = useCallback(() => {
     setCode(initial);
     setResult(null);
+    setPreviewHtml(initial);
+    setReloadKey((k) => k + 1);
   }, [initial]);
 
   return (
-    <div className="not-prose my-8 rounded-2xl border border-border bg-surface p-4 shadow-card">
-      <div className="mb-3 flex items-center justify-between">
+    <div className="not-prose my-4 rounded-2xl border border-border bg-surface p-3 shadow-card sm:p-4">
+      <div className="mb-3 flex flex-wrap items-center justify-between gap-2">
         <span className="rounded-lg bg-muted px-2.5 py-1 text-xs font-medium uppercase tracking-wide text-muted-foreground">
           {language}
         </span>
@@ -63,22 +84,24 @@ export function CodePlayground({
             variant="secondary"
             size="sm"
             onClick={handleReset}
-            aria-label="コードをリセット"
+            aria-label="コードを見本に戻す"
           >
             <RotateCcw className="h-4 w-4" />
             リセット
           </Button>
 
-          {!isWeb && (
-            <Button size="sm" onClick={handleRun} disabled={loading}>
-              {loading ? (
-                <Loader2 className="h-4 w-4 animate-spin" />
-              ) : (
-                <Play className="h-4 w-4" />
-              )}
-              実行
-            </Button>
-          )}
+          <Button
+            size="sm"
+            onClick={isWeb ? handleRunWeb : handleRunConsole}
+            disabled={!isWeb && loading}
+          >
+            {!isWeb && loading ? (
+              <Loader2 className="h-4 w-4 animate-spin" />
+            ) : (
+              <Play className="h-4 w-4" />
+            )}
+            実行
+          </Button>
         </div>
       </div>
 
@@ -91,7 +114,11 @@ export function CodePlayground({
         />
 
         {isWeb ? (
-          <WebPreview html={code} height={editorHeight} />
+          <WebPreview
+            html={previewHtml}
+            reloadKey={reloadKey}
+            height={editorHeight}
+          />
         ) : (
           <ConsoleOutput
             result={result}
@@ -101,12 +128,12 @@ export function CodePlayground({
         )}
       </div>
 
-      {isWeb && (
+      {isWeb ? (
         <p className="mt-3 text-xs text-muted-foreground">
-          コードを書き換えると、右側のプレビューに自動で反映されます。
+          コードを書き換えると、右のプレビューに自動で反映されます。
+          「実行」を押すと、その場でもう一度動かせます。
         </p>
-      )}
-      {!isWeb && (
+      ) : (
         <p className="mt-3 text-xs text-muted-foreground">
           「実行」を押すと Piston
           の公開サーバーでコードが実行されます（結果が返るまで数秒かかることがあります）。

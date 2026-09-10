@@ -1,0 +1,67 @@
+---
+title: 文章の行数・単語数・文字数を数える
+description: 複数行の文字列を分解して集計する、ミニ文章アナライザ。
+language: ruby
+kind: console
+difficulty: 上級
+emoji: 📝
+order: 4
+minutes: 8
+starterCode: |
+  text = <<~TEXT
+    コーヒーを淹れる
+    豆を挽いて お湯を注ぐ
+    3分 待つ
+  TEXT
+
+  lines = text.lines.map(&:strip).reject(&:empty?)
+  words = text.split
+  chars = text.gsub(/\s/, "").length
+
+  puts "行数: #{lines.size}"
+  puts "単語数: #{words.size}"
+  puts "文字数（空白除く）: #{chars}"
+
+  longest = lines.max_by(&:length)
+  puts "いちばん長い行: #{longest}"
+practiceHint: "ヒアドキュメント（<<~TEXT ... TEXT）の中身の行を増やしたり減らしたりして、集計結果の変化を見てみよう。"
+quiz:
+  question: "配列 lines の中で「最も長い要素」を取り出すメソッドはどれ？"
+  codeSnippet: |
+    lines = ["短い", "いちばん長い行です", "ふつう"]
+    longest = lines.___CHOICE___ { |line| line.length }
+    puts longest
+  options:
+    - label: "max_by"
+      isCorrect: true
+    - label: "max"
+      isCorrect: false
+    - label: "sort"
+      isCorrect: false
+  explanation: "max_by はブロックの戻り値（ここでは文字数）が最大の要素そのものを返します。max はブロック無しだと文字列同士を辞書順で比べてしまい、「長さ」では選べません。"
+---
+
+## 文字列を分解する
+
+```ruby
+text.lines            # 行ごとの配列（改行付き）
+text.split            # 空白で区切った単語の配列
+text.gsub(/\s/, "")   # 空白（スペース・改行）を全部消す
+```
+
+`map(&:strip)` は「各要素に `strip` を呼ぶ」の短縮形。
+`reject(&:empty?)` で空行を捨てています。
+
+## 条件付きの最大・最小
+
+```ruby
+lines.max_by { |line| line.length }
+```
+
+`max_by` は「何を基準に最大とみなすか」をブロックで指定できます。
+`min_by`、`sort_by` も同じ考え方です。
+
+<Callout>
+`<<~TEXT ... TEXT` は **ヒアドキュメント**。複数行の文字列を、
+インデントを自動で取り除いて書けます。
+</Callout>

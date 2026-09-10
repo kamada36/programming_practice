@@ -1,0 +1,67 @@
+---
+title: 点数リストの合計・平均・最高点
+description: リストに対して sum / len / max を使い、集計する。
+language: python
+kind: console
+difficulty: 中級
+emoji: 📊
+order: 3
+minutes: 5
+starterCode: |
+  scores = [72, 88, 95, 60, 78, 90]
+
+  total = sum(scores)
+  average = total / len(scores)
+  best = max(scores)
+
+  print(f"人数: {len(scores)} 人")
+  print(f"合計: {total} 点")
+  print(f"平均: {average:.1f} 点")
+  print(f"最高: {best} 点")
+
+  # 平均以上の点だけ集める
+  above = [s for s in scores if s >= average]
+  print(f"平均以上: {above}")
+practiceHint: "scores のリストに好きな点数を足したり減らしたりして、平均や「平均以上」の顔ぶれがどう変わるか見てみよう。"
+quiz:
+  question: "リスト scores の平均点を求める式はどれ？"
+  codeSnippet: |
+    scores = [72, 88, 95, 60, 78, 90]
+    average = ___CHOICE___
+    print(round(average, 1))
+  options:
+    - label: "sum(scores) / len(scores)"
+      isCorrect: true
+    - label: "sum(scores) / scores"
+      isCorrect: false
+    - label: "average(scores)"
+      isCorrect: false
+  explanation: "sum(scores) で合計、len(scores) で個数が得られます。合計 ÷ 個数 が平均です。Python に average という組み込み関数はありません。"
+---
+
+## 集計の定番関数
+
+| やりたいこと | 関数 |
+| --- | --- |
+| 合計 | `sum(リスト)` |
+| 個数 | `len(リスト)` |
+| 最大 / 最小 | `max(リスト)` / `min(リスト)` |
+
+平均は「合計 ÷ 個数」で計算します。
+
+```python
+average = sum(scores) / len(scores)
+print(f"{average:.1f}")   # 小数第1位まで
+```
+
+## 条件でしぼり込む
+
+```python
+above = [s for s in scores if s >= average]
+```
+
+これは **リスト内包表記** で、「`scores` を1つずつ見て、`average` 以上のものだけ集める」という意味です。
+
+<Callout>
+`{average:.1f}` の `.1f` は「小数第1位まで表示」の指定です。`.2f` にすると 2 桁になります。
+</Callout>

@@ -1,5 +1,7 @@
 import type { MDXRemoteProps } from "next-mdx-remote/rsc";
 import { CodePlayground } from "@/components/CodePlayground";
+import { StepPractice } from "@/components/StepPractice";
+import { QuizChallenge } from "@/components/QuizChallenge";
 
 /**
  * MDX 本文から使えるカスタムコンポーネント。
@@ -25,5 +27,7 @@ function Callout({
 
 export const mdxComponents: MDXRemoteProps["components"] = {
   CodePlayground,
+  StepPractice,
+  QuizChallenge,
   Callout,
 };

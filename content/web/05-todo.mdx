@@ -1,0 +1,127 @@
+---
+title: 追加・削除できるミニToDoリスト
+description: 入力をリストに足し、クリックで消す。配列とDOMをつなぐ練習。
+language: html
+kind: web
+difficulty: 中級
+emoji: ✅
+order: 4
+minutes: 6
+starterCode: |
+  <!DOCTYPE html>
+  <html lang="ja">
+  <head>
+    <meta charset="UTF-8" />
+    <style>
+      body { font-family: system-ui, sans-serif; margin: 0; padding: 1.5rem;
+             background: #fdfbf7; color: #2c221e; }
+      h1 { font-size: 1.2rem; }
+      form { display: flex; gap: 0.5rem; }
+      input { flex: 1; padding: 0.5rem; border: 1px solid #d9cfc4; border-radius: 8px; }
+      button { padding: 0.5rem 0.9rem; border: none; border-radius: 8px;
+               background: #6b4423; color: #fff; cursor: pointer; }
+      ul { list-style: none; padding: 0; margin-top: 1rem; }
+      li { display: flex; justify-content: space-between; padding: 0.5rem 0.2rem;
+           border-bottom: 1px solid #eee; cursor: pointer; }
+      li:hover { color: #d97706; text-decoration: line-through; }
+    </style>
+  </head>
+  <body>
+    <h1>今日やること</h1>
+    <form id="form">
+      <input id="input" placeholder="例：豆を挽く" />
+      <button type="submit">追加</button>
+    </form>
+    <ul id="list"></ul>
+
+    <script>
+      const todos = ["お湯をわかす", "ドリップする"];
+      const list = document.getElementById("list");
+
+      function render() {
+        list.innerHTML = "";
+        todos.forEach((text, index) => {
+          const li = document.createElement("li");
+          li.textContent = text;
+          li.addEventListener("click", () => {
+            todos.splice(index, 1);
+            render();
+          });
+          list.appendChild(li);
+        });
+      }
+
+      document.getElementById("form").addEventListener("submit", (e) => {
+        e.preventDefault();
+        const input = document.getElementById("input");
+        if (input.value.trim() === "") return;
+        todos.push(input.value.trim());
+        input.value = "";
+        render();
+      });
+
+      render();
+    </script>
+  </body>
+  </html>
+practiceHint: "todos 配列の初期値（\"お湯をわかす\" など）を自分のやることに書き換えてみよう。3つ以上でもOK。"
+quiz:
+  question: "フォーム送信時に、ページの再読み込みを止めるにはどれを呼ぶ？"
+  codeSnippet: |
+    <!DOCTYPE html>
+    <html lang="ja">
+    <head><meta charset="UTF-8" /></head>
+    <body style="font-family:system-ui;padding:1.5rem">
+      <form id="form">
+        <input id="input" placeholder="入力" />
+        <button type="submit">追加</button>
+      </form>
+      <ul id="list"></ul>
+      <script>
+        const todos = [];
+        const list = document.getElementById("list");
+        function render() {
+          list.innerHTML = todos.map((t) => "<li>" + t + "</li>").join("");
+        }
+        document.getElementById("form").addEventListener("submit", (e) => {
+          e.___CHOICE___();
+          const input = document.getElementById("input");
+          if (input.value.trim() !== "") todos.push(input.value.trim());
+          input.value = "";
+          render();
+        });
+      </script>
+    </body>
+    </html>
+  options:
+    - label: "preventDefault"
+      isCorrect: true
+    - label: "stopReload"
+      isCorrect: false
+    - label: "return false"
+      isCorrect: false
+  explanation: "フォームは送信時に既定でページを再読み込みします。イベントオブジェクトの e.preventDefault() を呼ぶと、その既定動作をキャンセルできます。"
+---
+
+## 仕組み
+
+データの本体は `todos` という **配列** です。
+画面（`<ul>`）は毎回まるごと作り直します。
+
+```js
+function render() {
+  list.innerHTML = "";
+  todos.forEach((text, index) => { /* <li> を1つずつ作る */ });
+}
+```
+
+- 追加：`todos.push(...)` してから `render()`
+- 削除：`todos.splice(index, 1)` してから `render()`
+
+「配列を変える → 画面を作り直す」の一方通行にすると、
+表示とデータがズレなくなります。
+
+<Callout type="warn">
+`e.preventDefault()` を消すと、追加のたびにページが再読み込みされて
+入力が消えてしまいます。フォームの定番の落とし穴です。
+</Callout>

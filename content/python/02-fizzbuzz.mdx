@@ -17,6 +17,27 @@ starterCode: |
           print("Buzz")
       else:
           print(i)
+practiceHint: "range(1, 31) の 31 を 16 に変えると 1〜15 まで、51 に変えると 1〜50 まで処理します。数を変えて実行してみよう。"
+quiz:
+  question: "「i を 15 で割った余り」を求めて、割り切れるか調べる演算子はどれ？"
+  codeSnippet: |
+    for i in range(1, 31):
+        if i ___CHOICE___ 15 == 0:
+            print("FizzBuzz")
+        elif i ___CHOICE___ 3 == 0:
+            print("Fizz")
+        elif i ___CHOICE___ 5 == 0:
+            print("Buzz")
+        else:
+            print(i)
+  options:
+    - label: "%"
+      isCorrect: true
+    - label: "/"
+      isCorrect: false
+    - label: "*"
+      isCorrect: false
+  explanation: "% は「割った余り」を求める演算子（剰余）です。余りが 0 なら割り切れる＝その数の倍数、と判定できます。"
 ---
 
 ## ルール
