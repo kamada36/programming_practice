@@ -206,6 +206,89 @@ body {
   animation-delay: 3.6s;
 }
 
+/*
+ * タイトルの奥で、コーヒーをドリップしたときのような波紋。
+ * しずくが1滴落ちて → コーヒー色の輪がゆっくり広がって消える、を繰り返す。
+ */
+.hero-ripple {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  display: grid;
+  place-items: center;
+  pointer-events: none;
+}
+
+.hero-ripple > i,
+.hero-ripple > .hero-drip {
+  grid-area: 1 / 1;
+}
+
+.hero-ripple > i {
+  width: 14px;
+  height: 14px;
+  border-radius: 999px;
+  border: 2px solid hsl(var(--primary) / 0.4);
+  opacity: 0;
+  animation: hero-ripple 5.5s cubic-bezier(0.2, 0.6, 0.25, 1) infinite;
+}
+.hero-ripple > i:nth-child(3) {
+  animation-delay: 0.5s;
+}
+.hero-ripple > i:nth-child(4) {
+  animation-delay: 1s;
+}
+
+@keyframes hero-ripple {
+  0% {
+    opacity: 0;
+    transform: scale(0.2);
+  }
+  10% {
+    opacity: 0.5;
+  }
+  55% {
+    opacity: 0;
+    transform: scale(12);
+  }
+  100% {
+    opacity: 0;
+    transform: scale(12);
+  }
+}
+
+/* 落ちてくる一滴 */
+.hero-drip {
+  width: 6px;
+  height: 8px;
+  border-radius: 50% 50% 50% 50% / 65% 65% 35% 35%;
+  background: hsl(var(--primary));
+  opacity: 0;
+  animation: hero-drip 5.5s ease-in infinite;
+}
+
+@keyframes hero-drip {
+  0% {
+    opacity: 0;
+    transform: translateY(-42px) scaleY(1.5);
+  }
+  5% {
+    opacity: 0.9;
+  }
+  9% {
+    opacity: 0.9;
+    transform: translateY(0) scaleY(0.6);
+  }
+  13% {
+    opacity: 0;
+    transform: translateY(0) scaleY(0.3);
+  }
+  100% {
+    opacity: 0;
+    transform: translateY(0);
+  }
+}
+
 @media (prefers-reduced-motion: reduce) {
   .stamp-pop,
   .stamp-in,
@@ -219,7 +302,9 @@ body {
     animation: none;
     transform: scaleX(1);
   }
-  .hero-steam > i {
+  .hero-steam > i,
+  .hero-ripple > i,
+  .hero-drip {
     animation: none;
     opacity: 0;
   }

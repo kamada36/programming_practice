@@ -37,13 +37,21 @@ export default function HomePage() {
           </span>
           環境構築ゼロ・完全無料
         </span>
-        <h1
-          className="hero-rise mx-auto mt-4 max-w-2xl text-2xl font-bold leading-tight text-foreground sm:mt-5 sm:text-4xl"
-          style={{ animationDelay: "0.25s" }}
-        >
-          ゆっくり一杯、
-          <span className="hero-accent text-accent">コードの練習</span>。
-        </h1>
+        <div className="relative mx-auto mt-4 max-w-2xl sm:mt-5">
+          <span className="hero-ripple" aria-hidden>
+            <span className="hero-drip" />
+            <i />
+            <i />
+            <i />
+          </span>
+          <h1
+            className="hero-rise relative z-10 text-2xl font-bold leading-tight text-foreground sm:text-4xl"
+            style={{ animationDelay: "0.25s" }}
+          >
+            ゆっくり一杯、
+            <span className="hero-accent text-accent">コードの練習</span>。
+          </h1>
+        </div>
         <p
           className="hero-rise mx-auto mt-3 max-w-xl text-sm leading-relaxed text-muted-foreground sm:mt-4 sm:text-base"
           style={{ animationDelay: "0.5s" }}
