@@ -40,6 +40,7 @@ export const LEVELS: LevelMeta[] = [
     difficulty: "入門",
     emoji: "🌱",
     blurb: "はじめの一歩。写して動かすところから。",
+    tag: "写して動かす",
   },
   {
     slug: "basic",
@@ -47,6 +48,7 @@ export const LEVELS: LevelMeta[] = [
     difficulty: "初級",
     emoji: "☕",
     blurb: "基本の文法。小さな部品を組み立てる。",
+    tag: "基本の文法",
   },
   {
     slug: "intermediate",
@@ -54,6 +56,7 @@ export const LEVELS: LevelMeta[] = [
     difficulty: "中級",
     emoji: "🔥",
     blurb: "いくつかの部品を組み合わせて、動くものにする。",
+    tag: "組み合わせる",
   },
   {
     slug: "advanced",
@@ -61,6 +64,7 @@ export const LEVELS: LevelMeta[] = [
     difficulty: "上級",
     emoji: "🏆",
     blurb: "実用的なミニアプリに挑戦する。",
+    tag: "ミニアプリ",
   },
 ];
 

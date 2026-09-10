@@ -102,6 +102,8 @@ export interface LevelMeta {
   difficulty: Difficulty;
   /** アイコン絵文字 */
   emoji: string;
-  /** 一覧・トップで表示する短い説明 */
+  /** 一覧・詳細で表示する短い説明（1文） */
   blurb: string;
+  /** トップの目安表示に使うごく短いラベル（数語） */
+  tag: string;
 }
