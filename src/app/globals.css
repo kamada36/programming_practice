@@ -134,43 +134,6 @@ body {
   animation: hero-rise 1.4s cubic-bezier(0.16, 0.6, 0.24, 1) both;
 }
 
-/*
- * タイトル・本文・特徴の各要素。
- * ①登場（下からフェードイン）と、②波紋に合わせてゆらっと波打つ動き（ループ）。
- * ①は transform、②は translate を使うので合成される。
- * 各要素の 2 つの animation-delay は page.tsx でカンマ区切り指定
- * （例 style={{ animationDelay: "0.25s, 3.05s" }}）。
- */
-.hero-item {
-  animation:
-    hero-rise 1.4s cubic-bezier(0.16, 0.6, 0.24, 1) both,
-    hero-wave 5.5s ease-in-out infinite;
-}
-
-@keyframes hero-wave {
-  0% {
-    translate: 0 0;
-  }
-  3% {
-    translate: 0 -3px;
-  }
-  7% {
-    translate: 0 2px;
-  }
-  11% {
-    translate: 0 -1px;
-  }
-  15% {
-    translate: 0 0.4px;
-  }
-  19% {
-    translate: 0 0;
-  }
-  100% {
-    translate: 0 0;
-  }
-}
-
 /* アクセント語は少し遅れて、下線がすっと伸びる */
 @keyframes hero-underline {
   from {
@@ -338,7 +301,6 @@ body {
     animation-duration: 0.01ms;
   }
   .hero-rise,
-  .hero-item,
   .hero-badge {
     animation: none;
     opacity: 1;

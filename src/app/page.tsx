@@ -38,8 +38,8 @@ export default function HomePage() {
           環境構築ゼロ・完全無料
         </span>
         <h1
-          className="hero-item mx-auto mt-4 max-w-2xl text-2xl font-bold leading-tight text-foreground sm:mt-5 sm:text-4xl"
-          style={{ animationDelay: "0.25s, 3.05s" }}
+          className="hero-rise mx-auto mt-4 max-w-2xl text-2xl font-bold leading-tight text-foreground sm:mt-5 sm:text-4xl"
+          style={{ animationDelay: "0.25s" }}
         >
           ゆっくり一杯、
           <span className="hero-accent text-accent">
@@ -54,16 +54,16 @@ export default function HomePage() {
           。
         </h1>
         <p
-          className="hero-item mx-auto mt-3 max-w-xl text-sm leading-relaxed text-muted-foreground sm:mt-4 sm:text-base"
-          style={{ animationDelay: "0.5s, 3.24s" }}
+          className="hero-rise mx-auto mt-3 max-w-xl text-sm leading-relaxed text-muted-foreground sm:mt-4 sm:text-base"
+          style={{ animationDelay: "0.5s" }}
         >
           ブラウザだけで動く、プログラミングの小さな練習帳。
           気になったコードを選んで、書き換えて、その場で試せます。
         </p>
 
         <div
-          className="hero-item mx-auto mt-6 flex max-w-md flex-wrap justify-center gap-x-5 gap-y-2 text-xs text-muted-foreground sm:mt-7 sm:text-sm"
-          style={{ animationDelay: "0.75s, 3.42s" }}
+          className="hero-rise mx-auto mt-6 flex max-w-md flex-wrap justify-center gap-x-5 gap-y-2 text-xs text-muted-foreground sm:mt-7 sm:text-sm"
+          style={{ animationDelay: "0.75s" }}
         >
           <span className="inline-flex items-center gap-1.5">
             <Zap className="h-4 w-4 text-accent" />
