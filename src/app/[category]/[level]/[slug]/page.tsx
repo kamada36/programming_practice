@@ -54,11 +54,17 @@ export default function RecipePage({ params }: PageProps) {
         </Link>
         <span aria-hidden>/</span>
         <Link
-          href={`/${category.slug}/${level.slug}/`}
-          className="inline-flex items-center gap-1 transition-colors hover:text-foreground"
+          href={`/${category.slug}/`}
+          className="transition-colors hover:text-foreground"
         >
-          <ArrowLeft className="h-3.5 w-3.5" />
-          {category.slug === "web" ? "Web" : category.label} {level.label}
+          {category.emoji} {category.shortLabel}
+        </Link>
+        <span aria-hidden>/</span>
+        <Link
+          href={`/${category.slug}/${level.slug}/`}
+          className="transition-colors hover:text-foreground"
+        >
+          {level.emoji} {level.label}
         </Link>
       </nav>
 
@@ -101,13 +107,19 @@ export default function RecipePage({ params }: PageProps) {
         <MDXRemote source={content} components={mdxComponents} />
       </div>
 
-      <div className="mt-10 border-t border-border pt-6">
+      <div className="mt-10 flex flex-wrap gap-x-5 gap-y-2 border-t border-border pt-6">
         <Link
           href={`/${category.slug}/${level.slug}/`}
           className="inline-flex items-center gap-1.5 text-sm font-medium text-accent transition-colors hover:text-accent/80"
         >
           <ArrowLeft className="h-4 w-4" />
-          {category.slug === "web" ? "Web" : category.label} {level.label}の一覧へ
+          {category.shortLabel} {level.label}の一覧へ
+        </Link>
+        <Link
+          href={`/${category.slug}/`}
+          className="inline-flex items-center gap-1.5 text-sm font-medium text-muted-foreground transition-colors hover:text-foreground"
+        >
+          {category.shortLabel} のコース全体
         </Link>
       </div>
     </article>

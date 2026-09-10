@@ -84,7 +84,10 @@ export interface Recipe {
 /** カテゴリのメタ情報。 */
 export interface CategoryMeta {
   slug: string;
+  /** 正式名称（例: "HTML / CSS / JavaScript"） */
   label: string;
+  /** ナビ・見出し用の短い名前（例: "Web"） */
+  shortLabel: string;
   emoji: string;
   description: string;
 }

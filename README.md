@@ -43,12 +43,20 @@ npx serve out    # ビルド結果のローカルプレビュー
 
 ```
 content/<category>/<NN>-<slug>.mdx   チュートリアル記事
-src/app/                             ルーティング（一覧 / [category]/[slug]）
-src/components/                      Header, Footer, CodePlayground ほか
-src/lib/mdx.ts                       MDX 解析・一覧取得・カテゴリ定義
+src/app/                             ルーティング
+  page.tsx                             トップ（言語カード + カリキュラム一覧）
+  [category]/page.tsx                  言語コース（難易度別のレッスン行一覧）
+  [category]/[level]/page.tsx          難易度別の一覧
+  [category]/[level]/[slug]/page.tsx   レシピ詳細（3ステップ学習）
+src/components/                      Header, Footer, CategoryCard, LessonRow, Progress ほか
+src/lib/catalog.ts                   カテゴリ・難易度・配色の定義（node:fs 非依存 / クライアント可）
+src/lib/mdx.ts                       MDX 解析・一覧取得（サーバー専用）
 src/lib/piston.ts                    Piston API 呼び出し
 src/types/recipe.ts                  型定義
 ```
+
+一覧・トップの「1レッスン＝1行」表示は `LessonRow`（アイコン + タイトル + 難易度色 +
+所要時間 + クリア印）。難易度ごとの配色は `src/lib/catalog.ts` の `LEVEL_TONE`。
 
 ## 記事の追加方法
 
@@ -61,7 +69,7 @@ title: タイトル
 description: 一覧・OGP 用の短い説明
 language: python        # html | javascript | python | ruby | java | cpp
 kind: console           # web（iframe）| console（Piston）
-difficulty: 入門         # 入門 | 初級 | 中級
+difficulty: 入門         # 入門 | 初級 | 中級 | 上級
 emoji: 🐍
 order: 1
 minutes: 2
@@ -72,7 +80,7 @@ starterCode: |
 本文（解説）。<Callout> と <CodePlayground> が使えます。
 ```
 
-3. 新しいカテゴリを足す場合は `src/lib/mdx.ts` の `CATEGORIES` に追記。
+3. 新しいカテゴリを足す場合は `src/lib/catalog.ts` の `CATEGORIES` に追記。
 
 ## Piston 実行対応言語
 
