@@ -28,8 +28,8 @@ export function generateMetadata({ params }: PageProps): Metadata {
   if (!outline) return {};
   const { category } = outline;
   return {
-    title: `${category.shortLabel} のレシピ`,
-    description: `${category.label} のレシピ一覧（${outline.recipes.length}件）。${category.description}`,
+    title: `${category.shortLabel} のメニュー`,
+    description: `${category.label} のメニュー表（全${outline.recipes.length}品）。${category.description}`,
   };
 }
 
@@ -73,12 +73,15 @@ export default function CategoryPage({ params }: PageProps) {
         />
       </header>
 
-      <div className="mt-6">
-        <LevelSwitcher
-          categorySlug={category.slug}
-          available={available}
-          asAnchors
-        />
+      <div className="mt-7">
+        <h2 className="text-sm font-bold text-foreground">メニュー表</h2>
+        <div className="mt-2">
+          <LevelSwitcher
+            categorySlug={category.slug}
+            available={available}
+            asAnchors
+          />
+        </div>
       </div>
 
       <div className="mt-8 space-y-8">

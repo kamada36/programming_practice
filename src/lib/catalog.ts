@@ -28,7 +28,7 @@ export const CATEGORIES: CategoryMeta[] = [
     label: "Ruby",
     shortLabel: "Ruby",
     emoji: "💎",
-    description: "読みやすく書いていて楽しい言語。小さなレシピで手を動かす。",
+    description: "読みやすく書いていて楽しい言語。小さなメニューで手を動かす。",
   },
 ];
 

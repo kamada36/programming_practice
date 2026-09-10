@@ -16,10 +16,10 @@ export function Header() {
           </span>
           <span className="flex min-w-0 flex-col leading-tight">
             <span className="truncate text-sm font-semibold text-foreground sm:text-base">
-              コード・キッチン
+              コード・カフェ
             </span>
             <span className="hidden text-xs text-muted-foreground sm:block">
-              1分で動かす、実用レシピ
+              選んで、試して、味わう
             </span>
           </span>
         </Link>

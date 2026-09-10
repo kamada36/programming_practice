@@ -6,14 +6,14 @@ import { Footer } from "@/components/Footer";
 export const metadata: Metadata = {
   metadataBase: new URL("https://resilient-cer.com"),
   title: {
-    default: "コード・キッチン | 1分で動かす、実用プログラミングレシピ",
-    template: "%s | コード・キッチン",
+    default: "コード・カフェ | 選んで、試して、味わうプログラミング",
+    template: "%s | コード・カフェ",
   },
   description:
-    "環境構築なし。ブラウザだけで、HTML/CSS/JavaScript・Python・Ruby のコードを1分で動かせる 入門向けチュートリアル集。",
+    "環境構築なし。ブラウザだけで、HTML/CSS/JavaScript・Python・Ruby のコードを1分で試せる 入門向けメニュー集。気になったコードを選んで、書き換えて、動きを味わえます。",
   openGraph: {
     type: "website",
-    siteName: "コード・キッチン",
+    siteName: "コード・カフェ",
     locale: "ja_JP",
   },
 };

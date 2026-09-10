@@ -119,7 +119,7 @@ export default function RecipePage({ params }: PageProps) {
           href={`/${category.slug}/`}
           className="inline-flex items-center gap-1.5 text-sm font-medium text-muted-foreground transition-colors hover:text-foreground"
         >
-          {category.shortLabel} のコース全体
+          {category.shortLabel} のメニュー表
         </Link>
       </div>
     </article>

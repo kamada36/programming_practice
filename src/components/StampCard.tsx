@@ -39,7 +39,7 @@ export function StampCard({ recipes }: { recipes: StampRecipe[] }) {
           スタンプカード
         </h2>
         <p className="text-sm text-muted-foreground">
-          全 {total} レシピ中{" "}
+          全 {total} メニュー中{" "}
           <span className="font-bold text-accent">{count}</span> 個クリア
         </p>
       </div>
@@ -95,7 +95,7 @@ export function StampCard({ recipes }: { recipes: StampRecipe[] }) {
             </span>
           </>
         ) : (
-          "最初のレシピをクリアすると、スタンプが押されます。"
+          "最初のメニューをクリアすると、スタンプが押されます。"
         )}
         {upcoming && (
           <>

@@ -9,11 +9,11 @@ export function Footer() {
         <div className="flex flex-col gap-6 sm:flex-row sm:items-start sm:justify-between">
           <div className="max-w-sm">
             <p className="text-sm font-semibold text-foreground">
-              コード・キッチン
+              コード・カフェ
             </p>
             <p className="mt-2 text-sm leading-relaxed text-muted-foreground">
-              環境構築なしで、ブラウザだけでコードを動かせる
-              入門向けチュートリアル集です。
+              環境構築なしで、ブラウザだけでコードを試せる
+              入門向けのメニュー集です。
             </p>
           </div>
 
@@ -23,7 +23,7 @@ export function Footer() {
               href="/"
               className="text-muted-foreground transition-colors hover:text-foreground"
             >
-              レシピ一覧
+              メニュー表
             </Link>
             <a
               href="https://resilient-cer.com"
@@ -38,7 +38,7 @@ export function Footer() {
         </div>
 
         <p className="mt-8 text-xs text-muted-foreground">
-          &copy; {new Date().getFullYear()} コード・キッチン / resilient-cer.com
+          &copy; {new Date().getFullYear()} コード・カフェ / resilient-cer.com
         </p>
       </div>
     </footer>

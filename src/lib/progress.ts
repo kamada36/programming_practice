@@ -20,9 +20,9 @@ export interface Badge {
 
 export const BADGES: Badge[] = [
   { threshold: 1, label: "はじめの一歩", emoji: "🌱" },
-  { threshold: 3, label: "ビギナーマスター", emoji: "🥉" },
-  { threshold: 5, label: "レシピ職人", emoji: "🥈" },
-  { threshold: 10, label: "キッチンマスター", emoji: "🏆" },
+  { threshold: 3, label: "常連さん", emoji: "🥉" },
+  { threshold: 5, label: "メニュー通", emoji: "🥈" },
+  { threshold: 10, label: "カフェマスター", emoji: "🏆" },
 ];
 
 /** 現在のクリア数で獲得済みの、最上位バッジを返す。 */
