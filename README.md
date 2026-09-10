@@ -1,7 +1,11 @@
-# コード・キッチン（programming_practice）
+# コード・カフェ（programming_practice）
 
-環境構築なしで、ブラウザだけでコードを動かせる初心者向けチュートリアルサイト。
+環境構築なしで、ブラウザだけでコードを試せる初心者向けの学習サイト。
+「メニューを選んで、その場で試して、動きを味わう」カフェのコンセプト。
 既存ブログ [resilient-cer.com](https://resilient-cer.com) の「カフェ」風デザインを踏襲。
+
+> リポジトリ名・URL は `programming_practice` のまま。表示名／メタ情報のみ「コード・カフェ」。
+> コンテンツ1件のユーザー向け呼称は「メニュー」（コード上の型名 `Recipe` などは据え置き）。
 
 ## 技術スタック
 
@@ -42,12 +46,12 @@ npx serve out    # ビルド結果のローカルプレビュー
 ## ディレクトリ
 
 ```
-content/<category>/<NN>-<slug>.mdx   チュートリアル記事
+content/<category>/<NN>-<slug>.mdx   メニュー（チュートリアル記事）
 src/app/                             ルーティング
   page.tsx                             トップ（言語カード + カリキュラム一覧）
   [category]/page.tsx                  言語コース（難易度別のレッスン行一覧）
   [category]/[level]/page.tsx          難易度別の一覧
-  [category]/[level]/[slug]/page.tsx   レシピ詳細（3ステップ学習）
+  [category]/[level]/[slug]/page.tsx   メニュー詳細（3ステップ学習）
 src/components/                      Header, Footer, CategoryCard, LessonRow, Progress ほか
 src/lib/catalog.ts                   カテゴリ・難易度・配色の定義（node:fs 非依存 / クライアント可）
 src/lib/mdx.ts                       MDX 解析・一覧取得（サーバー専用）
@@ -58,7 +62,7 @@ src/types/recipe.ts                  型定義
 一覧・トップの「1レッスン＝1行」表示は `LessonRow`（アイコン + タイトル + 難易度色 +
 所要時間 + クリア印）。難易度ごとの配色は `src/lib/catalog.ts` の `LEVEL_TONE`。
 
-## 記事の追加方法
+## メニューの追加方法
 
 1. `content/<category>/` に `NN-slug.mdx` を作成（`NN` は表示順の連番、`slug` は URL）。
 2. Frontmatter に必須項目を記述：

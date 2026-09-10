@@ -105,7 +105,7 @@ export function StepPractice({
   return (
     <div className="not-prose my-6 sm:my-8">
       <p className="mb-2 text-xs font-semibold uppercase tracking-wider text-muted-foreground">
-        3ステップで身につける
+3つのステップ
       </p>
 
       {/* ステップ切り替えタブ（セグメントコントロール風） */}
@@ -184,7 +184,7 @@ export function StepPractice({
           desc="コードを1か所いじって、結果がどう変わるか試してみよう。"
         />
         <div className="mb-3 rounded-xl border border-accent/40 bg-accent/5 px-4 py-3 text-sm leading-relaxed text-foreground">
-          <span className="font-semibold text-accent">お題：</span>
+          <span className="font-semibold text-accent">アレンジ：</span>
           {practiceHint ??
             "コードの数値や文字を1か所だけ書き換えて、結果がどう変わるか試してみよう。"}
         </div>

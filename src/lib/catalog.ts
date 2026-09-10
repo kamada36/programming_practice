@@ -14,21 +14,21 @@ export const CATEGORIES: CategoryMeta[] = [
     shortLabel: "Web",
     emoji: "🌐",
     description:
-      "ブラウザだけで動く。ボタン・アニメーション・ミニアプリを その場でプレビュー。",
+      "ボタン、アニメーション、ミニアプリ。ブラウザの中でそのまま動きます。",
   },
   {
     slug: "python",
     label: "Python",
     shortLabel: "Python",
     emoji: "🐍",
-    description: "データ処理や自動化の入り口。1分でコードを実行して結果を確認。",
+    description: "データ処理や自動化の入り口。書いてすぐ結果を確認できます。",
   },
   {
     slug: "ruby",
     label: "Ruby",
     shortLabel: "Ruby",
     emoji: "💎",
-    description: "読みやすく書いていて楽しい言語。小さなレシピで手を動かす。",
+    description: "読みやすくて、書くのが楽しい言語。短い題材で手を動かします。",
   },
 ];
 
@@ -40,6 +40,7 @@ export const LEVELS: LevelMeta[] = [
     difficulty: "入門",
     emoji: "🌱",
     blurb: "はじめの一歩。写して動かすところから。",
+    tag: "写して動かす",
   },
   {
     slug: "basic",
@@ -47,20 +48,23 @@ export const LEVELS: LevelMeta[] = [
     difficulty: "初級",
     emoji: "☕",
     blurb: "基本の文法。小さな部品を組み立てる。",
+    tag: "基本の文法",
   },
   {
     slug: "intermediate",
     label: "中級編",
     difficulty: "中級",
     emoji: "🔥",
-    blurb: "複数の要素を組み合わせて、動くものを作る。",
+    blurb: "いくつかの部品を組み合わせて、動くものにする。",
+    tag: "組み合わせる",
   },
   {
     slug: "advanced",
     label: "上級編",
     difficulty: "上級",
     emoji: "🏆",
-    blurb: "実戦的なミニアプリに挑戦。",
+    blurb: "実用的なミニアプリに挑戦する。",
+    tag: "ミニアプリ",
   },
 ];
 

@@ -32,7 +32,7 @@ export function generateMetadata({ params }: PageProps): Metadata {
   if (!category || !level) return {};
   return {
     title: `${category.shortLabel} ${level.label}`,
-    description: `${category.shortLabel} の${level.label}レシピ一覧。${level.blurb}`,
+    description: `${category.shortLabel} の${level.label}メニュー一覧。${level.blurb}`,
   };
 }
 
@@ -55,7 +55,7 @@ export default function LevelListPage({ params }: PageProps) {
         className="inline-flex items-center gap-1.5 text-sm text-muted-foreground transition-colors hover:text-foreground"
       >
         <ArrowLeft className="h-4 w-4" />
-        {category.shortLabel} のコース
+        {category.shortLabel} のメニュー
       </Link>
 
       <header className="mt-5 sm:mt-6">
@@ -86,7 +86,7 @@ export default function LevelListPage({ params }: PageProps) {
         showLabel
       />
 
-      <ul className="mt-5 space-y-1.5">
+      <ul className="mt-5 max-w-md space-y-1.5">
         {recipes.map((recipe, i) => (
           <li key={recipe.slug}>
             <LessonRow {...toLessonRow(recipe, i + 1)} />
@@ -100,7 +100,7 @@ export default function LevelListPage({ params }: PageProps) {
           className="inline-flex items-center gap-1.5 text-sm font-medium text-accent transition-colors hover:text-accent/80"
         >
           <LayoutList className="h-4 w-4" />
-          {category.shortLabel} のコース全体を見る
+          {category.shortLabel} のメニューをすべて見る
         </Link>
       </div>
     </div>

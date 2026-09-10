@@ -5,12 +5,14 @@ import { ArrowLeft } from "lucide-react";
 import {
   CATEGORIES,
   getCategoryOutline,
+  recipeHref,
   recipeId,
   toLessonRow,
 } from "@/lib/mdx";
 import { LessonGroup } from "@/components/LessonGroup";
 import { LevelSwitcher } from "@/components/LevelSwitcher";
 import { Progress } from "@/components/Progress";
+import { ResumeButton } from "@/components/ResumeButton";
 
 interface PageProps {
   params: { category: string };
@@ -28,8 +30,8 @@ export function generateMetadata({ params }: PageProps): Metadata {
   if (!outline) return {};
   const { category } = outline;
   return {
-    title: `${category.shortLabel} のレシピ`,
-    description: `${category.label} のレシピ一覧（${outline.recipes.length}件）。${category.description}`,
+    title: `${category.shortLabel} のメニュー`,
+    description: `${category.label} のメニュー（全${outline.recipes.length}品）。${category.description}`,
   };
 }
 
@@ -71,14 +73,28 @@ export default function CategoryPage({ params }: PageProps) {
           ids={recipes.map(recipeId)}
           className="mt-4 max-w-xs"
         />
+        <div className="mt-4">
+          <ResumeButton
+            recipes={levels
+              .flatMap((b) => b.recipes)
+              .map((r) => ({
+                id: recipeId(r),
+                href: recipeHref(r),
+                title: r.frontmatter.title,
+              }))}
+          />
+        </div>
       </header>
 
-      <div className="mt-6">
-        <LevelSwitcher
-          categorySlug={category.slug}
-          available={available}
-          asAnchors
-        />
+      <div className="mt-7">
+        <h2 className="text-sm font-bold text-foreground">メニュー</h2>
+        <div className="mt-2">
+          <LevelSwitcher
+            categorySlug={category.slug}
+            available={available}
+            asAnchors
+          />
+        </div>
       </div>
 
       <div className="mt-8 space-y-8">
