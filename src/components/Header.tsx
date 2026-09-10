@@ -2,6 +2,7 @@ import Link from "next/link";
 import { Coffee } from "lucide-react";
 import { CATEGORIES, getAllRecipes } from "@/lib/mdx";
 import { StampBadge } from "@/components/StampBadge";
+import { BLOG } from "@/lib/site";
 
 /** カフェ風のブランドヘッダー。ロゴ + カテゴリナビゲーション + 進捗。 */
 export function Header() {
@@ -36,6 +37,15 @@ export function Header() {
               </Link>
             ))}
           </nav>
+          <a
+            href={BLOG.url}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="hidden items-center gap-1 rounded-lg px-2.5 py-2 text-sm text-muted-foreground transition-colors hover:bg-muted hover:text-foreground sm:inline-flex"
+          >
+            <span aria-hidden>☕</span>
+            Blog
+          </a>
           <StampBadge total={totalRecipes} />
         </div>
       </div>

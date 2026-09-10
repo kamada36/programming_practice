@@ -59,8 +59,20 @@ src/lib/piston.ts                    Piston API 呼び出し
 src/types/recipe.ts                  型定義
 ```
 
-一覧・トップの「1レッスン＝1行」表示は `LessonRow`（アイコン + タイトル + 難易度色 +
-所要時間 + クリア印）。難易度ごとの配色は `src/lib/catalog.ts` の `LEVEL_TONE`。
+一覧・トップの「1レッスン＝1行」表示は `LessonRow`（クリア印 + 通し番号 + タイトル）。
+
+### 本命ブログ（resilient-cer.com）への導線
+
+押し付けない「プル型」。割り込み表示は一切しない（ポップアップ・モーダル・
+クイズ正解時のオーバーレイ広告は禁止）。
+
+| 場所 | コンポーネント | 内容 |
+| --- | --- | --- |
+| 記事最下部 | `NextStepCard` | ベージュの「読み物」カード。frontmatter `nextStep` があればその関連記事、無ければ既定のブログ案内 |
+| その直下 | `ArticleFooter` | 運営者（鎌田 / Resilencer Cafe）の小さなプロフィール＋テキストリンク |
+| ヘッダー右端 | `Header` | 「☕ Blog」の控えめなリンク |
+
+ブログの定数・既定文言・`nextStep` 解決は `src/lib/site.ts`。
 
 ## メニューの追加方法
 
@@ -79,6 +91,13 @@ order: 1
 minutes: 2
 starterCode: |
   print("ここにエディタの初期コード")
+
+# 記事末尾の関連ブログ案内（任意）。未設定なら既定のブログトップ案内。
+nextStep:
+  title: "💡 Python を独学で進めるロードマップ"
+  description: "実務レベルまでの学習手順をブログで詳しく解説しています。"
+  url: "https://resilient-cer.com/python-roadmap"
+  # linkLabel: "Resilencer Cafe で読む"   # 任意
 ---
 
 本文（解説）。<Callout> と <CodePlayground> が使えます。

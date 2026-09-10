@@ -289,6 +289,10 @@ export function QuizChallenge({
         </div>
       </div>
 
+      {/*
+       * 正解時の演出はお祝いのみ（スタンプ + 控えめな紙吹雪）。
+       * ここに広告・送客カードを被せない（学習の達成感を守るためのガードレール）。
+       */}
       {celebrate && (
         <div
           className="pointer-events-none absolute inset-0 z-10 grid place-items-center"

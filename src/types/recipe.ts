@@ -25,6 +25,21 @@ export interface QuizOption {
   isCorrect: boolean;
 }
 
+/**
+ * 記事末尾に静かに置く、本命ブログ（resilient-cer.com）への関連記事案内。
+ * frontmatter で任意設定。未設定なら既定のブログ案内を表示する。
+ */
+export interface NextStep {
+  /** 控えめな見出し（例: "💡 JavaScript を独学でマスターする手順"） */
+  title: string;
+  /** 簡潔な説明（1〜2文） */
+  description: string;
+  /** 遷移先（resilient-cer.com 内の記事 URL） */
+  url: string;
+  /** リンクテキスト（任意。未設定なら既定文言） */
+  linkLabel?: string;
+}
+
 /** Step 3 の「選択式・穴埋めチャレンジ」データ。 */
 export interface Quiz {
   /** 出題文 */
@@ -67,6 +82,8 @@ export interface RecipeFrontmatter {
   practiceHint?: string;
   /** Step 3 の穴埋めクイズ（任意） */
   quiz?: Quiz;
+  /** 記事末尾のブログ関連記事案内（任意） */
+  nextStep?: NextStep;
 }
 
 /** 一覧・詳細で扱うレシピ。 */

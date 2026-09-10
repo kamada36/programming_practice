@@ -16,6 +16,9 @@ import {
 import { mdxComponents } from "@/components/mdx";
 import { StepPractice } from "@/components/StepPractice";
 import { LessonNav } from "@/components/LessonNav";
+import { NextStepCard } from "@/components/NextStepCard";
+import { ArticleFooter } from "@/components/ArticleFooter";
+import { resolveNextStep } from "@/lib/site";
 
 interface PageProps {
   params: { category: string; level: string; slug: string };
@@ -50,6 +53,7 @@ export default function RecipePage({ params }: PageProps) {
 
   const { frontmatter, content } = recipe;
   const { prev, next } = getAdjacentRecipes(params.category, params.slug);
+  const nextStep = resolveNextStep(frontmatter.nextStep);
 
   return (
     <article className="mx-auto max-w-3xl px-4 py-8 sm:py-10">
@@ -112,6 +116,7 @@ export default function RecipePage({ params }: PageProps) {
         <MDXRemote source={content} components={mdxComponents} />
       </div>
 
+      {/* 学習の続き（次のメニュー等） */}
       <LessonNav
         currentId={recipeId(recipe)}
         prev={
@@ -130,6 +135,17 @@ export default function RecipePage({ params }: PageProps) {
         menuHref={`/${category.slug}/`}
         categoryLabel={category.shortLabel}
       />
+
+      {/* 読み終えた人にだけ静かに見える、本命ブログへの案内 */}
+      <div className="mt-12 space-y-4 border-t border-border/60 pt-8">
+        <NextStepCard
+          title={nextStep.title}
+          description={nextStep.description}
+          linkLabel={nextStep.linkLabel}
+          href={nextStep.href}
+        />
+        <ArticleFooter />
+      </div>
     </article>
   );
 }
