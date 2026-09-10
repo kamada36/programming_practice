@@ -13,7 +13,10 @@ interface WebPreviewProps {
 
 /**
  * HTML / CSS / JavaScript を iframe 内でレンダリングするパーツ。
- * `sandbox` でスクリプト実行のみ許可し、同一オリジンアクセスは遮断する。
+ * `sandbox` はスクリプト・フォーム・モーダル等のみ許可し、`allow-same-origin` は
+ * 付けない（srcDoc は不透明オリジンなので、親ページや Cookie には触れられない）。
+ * `allow-forms` が無いと Chrome がサンドボックス内のフォーム送信を丸ごとブロックし、
+ * ToDo リストのような form の submit ハンドラが動かなくなるため必須。
  * デバウンスや「実行」のタイミング制御は呼び出し側（CodePlayground）が担当する。
  */
 export function WebPreview({ html, reloadKey = 0, height = 340 }: WebPreviewProps) {
@@ -30,7 +33,7 @@ export function WebPreview({ html, reloadKey = 0, height = 340 }: WebPreviewProp
         title="プレビュー"
         className="w-full bg-white"
         style={{ height }}
-        sandbox="allow-scripts allow-modals allow-popups"
+        sandbox="allow-scripts allow-forms allow-modals allow-popups"
         srcDoc={html}
       />
     </div>
