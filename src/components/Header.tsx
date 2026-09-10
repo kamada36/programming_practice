@@ -25,14 +25,14 @@ export function Header() {
         </Link>
 
         <div className="flex shrink-0 items-center gap-1 sm:gap-2">
-          <nav className="hidden items-center gap-1 md:flex">
+          <nav className="hidden items-center gap-0.5 md:flex">
             {CATEGORIES.map((c) => (
               <Link
                 key={c.slug}
-                href={`/#${c.slug}`}
+                href={`/${c.slug}/`}
                 className="rounded-lg px-3 py-2 text-sm text-muted-foreground transition-colors hover:bg-muted hover:text-foreground"
               >
-                {c.emoji} {c.slug === "web" ? "Web" : c.label}
+                <span aria-hidden>{c.emoji}</span> {c.shortLabel}
               </Link>
             ))}
           </nav>

@@ -1,16 +1,21 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
-import { ArrowLeft } from "lucide-react";
+import { ArrowLeft, LayoutList } from "lucide-react";
 import {
-  LEVELS,
   getAllLevelParams,
   getCategory,
+  getCategoryOutline,
   getLevel,
-  getRecipesByCategory,
   getRecipesByCategoryAndLevel,
+  recipeId,
+  toLessonRow,
 } from "@/lib/mdx";
-import { RecipeCard } from "@/components/RecipeCard";
+import { LessonRow } from "@/components/LessonRow";
+import { LevelSwitcher } from "@/components/LevelSwitcher";
+import { Progress } from "@/components/Progress";
+import { levelTone } from "@/lib/catalog";
+import { cn } from "@/lib/utils";
 
 interface PageProps {
   params: { category: string; level: string };
@@ -25,10 +30,9 @@ export function generateMetadata({ params }: PageProps): Metadata {
   const category = getCategory(params.category);
   const level = getLevel(params.level);
   if (!category || !level) return {};
-  const name = category.slug === "web" ? "Web" : category.label;
   return {
-    title: `${name} ${level.label}`,
-    description: `${name}の${level.label}レシピ一覧。${level.blurb}`,
+    title: `${category.shortLabel} ${level.label}`,
+    description: `${category.shortLabel} の${level.label}レシピ一覧。${level.blurb}`,
   };
 }
 
@@ -40,68 +44,65 @@ export default function LevelListPage({ params }: PageProps) {
   const recipes = getRecipesByCategoryAndLevel(params.category, params.level);
   if (recipes.length === 0) notFound();
 
-  const name = category.slug === "web" ? "Web" : category.label;
-
-  // 同カテゴリの他の難易度への導線
-  const otherLevels = LEVELS.filter(
-    (l) =>
-      l.slug !== level.slug &&
-      getRecipesByCategory(params.category).some(
-        (r) => r.frontmatter.difficulty === l.difficulty,
-      ),
-  );
+  const outline = getCategoryOutline(params.category);
+  const available = new Set(outline?.levels.map((b) => b.level.slug) ?? []);
+  const tone = levelTone(level.slug);
 
   return (
-    <div className="mx-auto max-w-5xl px-4 py-8 sm:py-10">
+    <div className="mx-auto max-w-4xl px-4 py-8 sm:py-10">
       <Link
-        href="/"
+        href={`/${category.slug}/`}
         className="inline-flex items-center gap-1.5 text-sm text-muted-foreground transition-colors hover:text-foreground"
       >
         <ArrowLeft className="h-4 w-4" />
-        トップへ
+        {category.shortLabel} のコース
       </Link>
 
       <header className="mt-5 sm:mt-6">
         <p className="text-sm text-muted-foreground">
-          {category.emoji} {category.label}
+          {category.emoji} {category.shortLabel}
         </p>
         <h1 className="mt-1 flex items-center gap-2 text-2xl font-bold text-foreground sm:text-3xl">
-          <span>{level.emoji}</span>
-          {name} {level.label}
+          <span className={cn("h-6 w-1.5 rounded-full", tone.bar)} aria-hidden />
+          <span aria-hidden>{level.emoji}</span>
+          {level.label}
         </h1>
         <p className="mt-2 text-sm leading-relaxed text-muted-foreground sm:text-base">
           {level.blurb}
         </p>
       </header>
 
-      <div className="mt-6 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
-        {recipes.map((recipe) => (
-          <RecipeCard
-            key={`${recipe.category}/${recipe.slug}`}
-            recipe={recipe}
-          />
-        ))}
+      <div className="mt-5">
+        <LevelSwitcher
+          categorySlug={category.slug}
+          activeSlug={level.slug}
+          available={available}
+        />
       </div>
 
-      {otherLevels.length > 0 && (
-        <nav className="mt-10 border-t border-border pt-6">
-          <p className="text-sm font-medium text-foreground">
-            {name}の他のレベル
-          </p>
-          <div className="mt-3 flex flex-wrap gap-2">
-            {otherLevels.map((l) => (
-              <Link
-                key={l.slug}
-                href={`/${category.slug}/${l.slug}/`}
-                className="inline-flex items-center gap-1.5 rounded-xl border border-border bg-surface px-3 py-2 text-sm font-medium text-muted-foreground transition-colors hover:bg-muted hover:text-foreground"
-              >
-                <span>{l.emoji}</span>
-                {l.label}
-              </Link>
-            ))}
-          </div>
-        </nav>
-      )}
+      <Progress
+        ids={recipes.map(recipeId)}
+        className="mt-5 max-w-xs"
+        showLabel
+      />
+
+      <ul className="mt-5 space-y-1.5">
+        {recipes.map((recipe, i) => (
+          <li key={recipe.slug}>
+            <LessonRow {...toLessonRow(recipe, i + 1)} />
+          </li>
+        ))}
+      </ul>
+
+      <div className="mt-10 border-t border-border/60 pt-6">
+        <Link
+          href={`/${category.slug}/`}
+          className="inline-flex items-center gap-1.5 text-sm font-medium text-accent transition-colors hover:text-accent/80"
+        >
+          <LayoutList className="h-4 w-4" />
+          {category.shortLabel} のコース全体を見る
+        </Link>
+      </div>
     </div>
   );
 }
