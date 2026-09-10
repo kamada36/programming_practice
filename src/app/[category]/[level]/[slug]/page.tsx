@@ -1,17 +1,21 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
-import { ArrowLeft, Clock } from "lucide-react";
+import { Clock } from "lucide-react";
 import { MDXRemote } from "next-mdx-remote/rsc";
 import {
+  getAdjacentRecipes,
   getAllRecipeParams,
   getCategory,
   getLevel,
   getRecipe,
+  recipeHref,
+  recipeId,
   recipeLevelSlug,
 } from "@/lib/mdx";
 import { mdxComponents } from "@/components/mdx";
 import { StepPractice } from "@/components/StepPractice";
+import { LessonNav } from "@/components/LessonNav";
 
 interface PageProps {
   params: { category: string; level: string; slug: string };
@@ -45,6 +49,7 @@ export default function RecipePage({ params }: PageProps) {
   if (recipeLevelSlug(recipe) !== params.level) notFound();
 
   const { frontmatter, content } = recipe;
+  const { prev, next } = getAdjacentRecipes(params.category, params.slug);
 
   return (
     <article className="mx-auto max-w-3xl px-4 py-8 sm:py-10">
@@ -107,21 +112,24 @@ export default function RecipePage({ params }: PageProps) {
         <MDXRemote source={content} components={mdxComponents} />
       </div>
 
-      <div className="mt-10 flex flex-wrap gap-x-5 gap-y-2 border-t border-border pt-6">
-        <Link
-          href={`/${category.slug}/${level.slug}/`}
-          className="inline-flex items-center gap-1.5 text-sm font-medium text-accent transition-colors hover:text-accent/80"
-        >
-          <ArrowLeft className="h-4 w-4" />
-          {category.shortLabel} {level.label}の一覧
-        </Link>
-        <Link
-          href={`/${category.slug}/`}
-          className="inline-flex items-center gap-1.5 text-sm font-medium text-muted-foreground transition-colors hover:text-foreground"
-        >
-          {category.shortLabel} のメニュー
-        </Link>
-      </div>
+      <LessonNav
+        currentId={recipeId(recipe)}
+        prev={
+          prev
+            ? { href: recipeHref(prev), title: prev.frontmatter.title }
+            : undefined
+        }
+        next={
+          next
+            ? { href: recipeHref(next), title: next.frontmatter.title }
+            : undefined
+        }
+        isLast={!next}
+        levelHref={`/${category.slug}/${level.slug}/`}
+        levelLabel={level.label}
+        menuHref={`/${category.slug}/`}
+        categoryLabel={category.shortLabel}
+      />
     </article>
   );
 }

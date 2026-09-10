@@ -5,12 +5,14 @@ import { ArrowLeft } from "lucide-react";
 import {
   CATEGORIES,
   getCategoryOutline,
+  recipeHref,
   recipeId,
   toLessonRow,
 } from "@/lib/mdx";
 import { LessonGroup } from "@/components/LessonGroup";
 import { LevelSwitcher } from "@/components/LevelSwitcher";
 import { Progress } from "@/components/Progress";
+import { ResumeButton } from "@/components/ResumeButton";
 
 interface PageProps {
   params: { category: string };
@@ -71,6 +73,17 @@ export default function CategoryPage({ params }: PageProps) {
           ids={recipes.map(recipeId)}
           className="mt-4 max-w-xs"
         />
+        <div className="mt-4">
+          <ResumeButton
+            recipes={levels
+              .flatMap((b) => b.recipes)
+              .map((r) => ({
+                id: recipeId(r),
+                href: recipeHref(r),
+                title: r.frontmatter.title,
+              }))}
+          />
+        </div>
       </header>
 
       <div className="mt-7">

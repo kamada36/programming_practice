@@ -23,8 +23,8 @@ export interface LessonRowData {
 }
 
 /**
- * 一覧の1行。番号（クリア済みならチェック）+ タイトル + 難易度色ドット。
- * タイトルは省略せず全文表示する。幅は狭め。
+ * 一覧の1行。左端にクリア済みチェック（枠の外）、その内側に通し番号（消えない）、
+ * タイトル全文、難易度色ドット。行全体がリンク。
  */
 export function LessonRow({
   id,
@@ -41,24 +41,26 @@ export function LessonRow({
   return (
     <Link
       href={href}
-      className="group flex items-center gap-2.5 rounded-lg border border-border/70 bg-surface py-2 pl-2 pr-2.5 transition-colors hover:border-accent/50 hover:bg-muted/40 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent"
+      className="group flex items-center gap-2 rounded-lg border border-border/70 bg-surface py-2 pl-1 pr-2.5 transition-colors hover:border-accent/50 hover:bg-muted/40 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent"
     >
+      {/* クリア済みチェック（枠の外・一番左。未クリア時は場所だけ確保） */}
+      <span className="grid w-4 shrink-0 place-items-center" aria-hidden>
+        {done && (
+          <Check className="h-3.5 w-3.5 text-emerald-600 dark:text-emerald-400" />
+        )}
+      </span>
+
+      {/* 通し番号（クリアしても消えない） */}
       <span
         className={cn(
           "grid h-6 w-6 shrink-0 place-items-center rounded text-[11px] font-semibold tabular-nums",
           done
-            ? "bg-emerald-100 text-emerald-600 dark:bg-emerald-400/15 dark:text-emerald-400"
+            ? "bg-emerald-100 text-emerald-700 dark:bg-emerald-400/15 dark:text-emerald-300"
             : "bg-muted text-muted-foreground/70",
         )}
         aria-hidden
       >
-        {done ? (
-          <Check className="h-3.5 w-3.5" />
-        ) : typeof step === "number" ? (
-          String(step).padStart(2, "0")
-        ) : (
-          ""
-        )}
+        {typeof step === "number" ? String(step).padStart(2, "0") : ""}
       </span>
 
       <span className="min-w-0 flex-1 text-sm leading-snug text-foreground">

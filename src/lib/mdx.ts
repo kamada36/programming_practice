@@ -148,6 +148,23 @@ export function getRecipe(
     .find((r) => r.slug === slug);
 }
 
+/**
+ * 同じカテゴリ内での前後のレシピ。
+ * 並びは難易度（入門→上級）→ その中の order 順で、
+ * カテゴリページのメニュー一覧の見た目と一致させる。
+ */
+export function getAdjacentRecipes(
+  category: string,
+  slug: string,
+): { prev?: Recipe; next?: Recipe } {
+  const outline = getCategoryOutline(category);
+  if (!outline) return {};
+  const list = outline.levels.flatMap((bucket) => bucket.recipes);
+  const i = list.findIndex((r) => r.slug === slug);
+  if (i === -1) return {};
+  return { prev: list[i - 1], next: list[i + 1] };
+}
+
 /** 静的生成用の全 [category]/[level] 組み合わせ（レシピが1件以上あるもの）。 */
 export function getAllLevelParams(): { category: string; level: string }[] {
   const params: { category: string; level: string }[] = [];
