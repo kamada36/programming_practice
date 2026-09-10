@@ -8,38 +8,26 @@ const STORAGE_KEY = "code-kitchen:cleared:v1";
 /** 進捗が変わったことを同一タブ内へ知らせるカスタムイベント名。 */
 const PROGRESS_EVENT = "code-kitchen:progress";
 
-/** スタンプが貯まると獲得できる称号バッジ。 */
-export interface Badge {
-  /** 獲得に必要なクリア数 */
-  threshold: number;
-  /** 称号名 */
-  label: string;
+/** 1言語分のスタンプ達成メモ（おまけ表示用の控えめなバッジ）。 */
+export interface StampMilestone {
   /** 表示絵文字 */
   emoji: string;
+  /** ツールチップ等に使うラベル */
+  label: string;
 }
 
-export const BADGES: Badge[] = [
-  { threshold: 1, label: "はじめの一歩", emoji: "🌱" },
-  { threshold: 3, label: "常連さん", emoji: "🥉" },
-  { threshold: 5, label: "メニュー通", emoji: "🥈" },
-  { threshold: 10, label: "カフェマスター", emoji: "🏆" },
-];
-
-/** 現在のクリア数で獲得済みの、最上位バッジを返す。 */
-export function earnedBadge(count: number): Badge | null {
-  let earned: Badge | null = null;
-  for (const b of BADGES) {
-    if (count >= b.threshold) earned = b;
-  }
-  return earned;
-}
-
-/** 次に狙えるバッジを返す（すべて獲得済みなら null）。 */
-export function nextBadge(count: number): Badge | null {
-  for (const b of BADGES) {
-    if (count < b.threshold) return b;
-  }
-  return null;
+/**
+ * その言語で「何杯クリアしたか」に応じた控えめなバッジを返す。
+ * 言語ごとにメニュー数が違う（4〜6品）ため、割合で判定する。
+ */
+export function stampMilestone(
+  done: number,
+  total: number,
+): StampMilestone | null {
+  if (total === 0 || done === 0) return null;
+  if (done >= total) return { emoji: "🏆", label: "コンプリート" };
+  if (done * 2 >= total) return { emoji: "☕", label: "折り返し" };
+  return { emoji: "🌱", label: "スタート" };
 }
 
 function parse(raw: string | null): string[] {

@@ -1,12 +1,6 @@
 import Link from "next/link";
 import { ArrowRight, Sparkles, Zap, Coffee } from "lucide-react";
-import {
-  LEVELS,
-  getCatalog,
-  getAllRecipes,
-  recipeId,
-  toLessonRow,
-} from "@/lib/mdx";
+import { LEVELS, getCatalog, recipeId, toLessonRow } from "@/lib/mdx";
 import { CategoryCard } from "@/components/CategoryCard";
 import { LessonGroup } from "@/components/LessonGroup";
 import { StampCard } from "@/components/StampCard";
@@ -14,11 +8,13 @@ import { StampCard } from "@/components/StampCard";
 export default function HomePage() {
   const catalog = getCatalog();
 
-  const stampRecipes = getAllRecipes().map((r) => ({
-    id: recipeId(r),
-    title: r.frontmatter.title,
-    emoji: r.frontmatter.emoji,
+  const stampGroups = catalog.map(({ category, recipes }) => ({
+    slug: category.slug,
+    label: category.shortLabel,
+    emoji: category.emoji,
+    recipeIds: recipes.map(recipeId),
   }));
+  const totalMenus = stampGroups.reduce((n, g) => n + g.recipeIds.length, 0);
 
   return (
     <div className="mx-auto max-w-4xl px-4">
@@ -61,7 +57,7 @@ export default function HomePage() {
             まず、言語を選ぶ
           </h2>
           <p className="text-xs text-muted-foreground sm:text-sm">
-            全 {stampRecipes.length} メニュー
+            全 {totalMenus} メニュー
           </p>
         </div>
         <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-3 sm:gap-4">
@@ -81,9 +77,9 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* スタンプカード（進捗） */}
-      <div className="py-6">
-        <StampCard recipes={stampRecipes} />
+      {/* スタンプカード（おまけ・控えめ） */}
+      <div className="mt-3">
+        <StampCard groups={stampGroups} />
       </div>
 
       {/* カテゴリ別カリキュラム */}

@@ -1,109 +1,84 @@
 "use client";
 
 import { useMemo } from "react";
-import { Coffee } from "lucide-react";
 import { useClearedIds } from "@/hooks/useProgress";
-import { BADGES, earnedBadge, nextBadge } from "@/lib/progress";
+import { stampMilestone } from "@/lib/progress";
 import { cn } from "@/lib/utils";
 
-export interface StampRecipe {
-  /** "web/button-click" 形式の ID */
-  id: string;
-  title: string;
-  emoji?: string;
+/** 1言語分のスタンプ対象。 */
+export interface StampGroup {
+  slug: string;
+  /** 表示名（"Web" など） */
+  label: string;
+  emoji: string;
+  /** その言語のメニューの進捗 ID 一覧 */
+  recipeIds: string[];
 }
 
 /**
- * 機能③：カフェ風スタンプカード。
- * LocalStorage のクリア実績を読み、スタンプと称号バッジを表示する。
+ * カフェのポイントカード風スタンプ。おまけ要素なので控えめに。
+ * 言語ごとに「何杯クリアしたか」をドットで表示する。
  */
-export function StampCard({ recipes }: { recipes: StampRecipe[] }) {
+export function StampCard({ groups }: { groups: StampGroup[] }) {
   const cleared = useClearedIds();
   const clearedSet = useMemo(() => new Set(cleared), [cleared]);
 
-  const total = recipes.length;
-  const count = recipes.filter((r) => clearedSet.has(r.id)).length;
-  const badge = earnedBadge(count);
-  const upcoming = nextBadge(count);
+  const total = groups.reduce((n, g) => n + g.recipeIds.length, 0);
+  const done = groups.reduce(
+    (n, g) => n + g.recipeIds.filter((id) => clearedSet.has(id)).length,
+    0,
+  );
 
   return (
     <section
       id="stamp"
-      className="scroll-mt-20 rounded-2xl border border-border bg-surface p-5 shadow-card"
+      className="scroll-mt-24 rounded-xl border border-border/70 bg-surface px-4 py-3"
     >
-      <div className="flex flex-wrap items-center justify-between gap-2">
-        <h2 className="flex items-center gap-2 text-lg font-semibold text-foreground">
-          <span className="grid h-8 w-8 place-items-center rounded-xl bg-primary text-primary-foreground">
-            <Coffee className="h-4 w-4" />
-          </span>
+      <div className="flex items-center justify-between gap-2">
+        <h2 className="flex items-center gap-1.5 text-xs font-semibold text-muted-foreground">
+          <span aria-hidden>🎫</span>
           スタンプカード
+          <span className="font-normal text-muted-foreground/70">
+            （おまけ）
+          </span>
         </h2>
-        <p className="text-sm text-muted-foreground">
-          全 {total} メニュー中{" "}
-          <span className="font-bold text-accent">{count}</span> 個クリア
-        </p>
+        <span className="shrink-0 text-xs tabular-nums text-muted-foreground">
+          計 <span className="font-semibold text-foreground">{done}</span> / {total}
+        </span>
       </div>
 
-      {/* スタンプ枠 */}
-      <div className="mt-4 grid grid-cols-5 gap-2 sm:grid-cols-10">
-        {recipes.map((r) => {
-          const done = clearedSet.has(r.id);
+      <ul className="mt-2 divide-y divide-border/50">
+        {groups.map((g) => {
+          const gDone = g.recipeIds.filter((id) => clearedSet.has(id)).length;
+          const gTotal = g.recipeIds.length;
+          const milestone = stampMilestone(gDone, gTotal);
           return (
-            <div
-              key={r.id}
-              title={done ? `${r.title}（クリア済み）` : r.title}
-              className={cn(
-                "grid aspect-square place-items-center rounded-full border-2 text-lg transition-colors",
-                done
-                  ? "stamp-in border-accent bg-accent/10 text-accent"
-                  : "border-dashed border-border text-muted-foreground/40",
-              )}
-            >
-              {done ? r.emoji ?? "☕" : ""}
-            </div>
+            <li key={g.slug} className="flex items-center gap-3 py-1.5">
+              <span className="flex w-24 shrink-0 items-center gap-1.5 text-xs font-medium text-foreground">
+                <span aria-hidden>{g.emoji}</span>
+                {g.label}
+              </span>
+              <span className="flex flex-1 flex-wrap gap-1" aria-hidden>
+                {g.recipeIds.map((id) => (
+                  <span
+                    key={id}
+                    className={cn(
+                      "h-2 w-2 rounded-full",
+                      clearedSet.has(id) ? "bg-accent" : "bg-muted",
+                    )}
+                  />
+                ))}
+              </span>
+              <span className="flex shrink-0 items-center gap-1 text-xs tabular-nums text-muted-foreground">
+                {gDone}/{gTotal}
+                <span className="w-4 text-center" title={milestone?.label}>
+                  {milestone?.emoji ?? ""}
+                </span>
+              </span>
+            </li>
           );
         })}
-      </div>
-
-      {/* 称号バッジ */}
-      <div className="mt-4 flex flex-wrap items-center gap-2">
-        {BADGES.map((b) => {
-          const owned = count >= b.threshold;
-          return (
-            <span
-              key={b.label}
-              className={cn(
-                "inline-flex items-center gap-1 rounded-full border px-2.5 py-1 text-xs font-medium",
-                owned
-                  ? "border-accent/50 bg-accent/10 text-accent"
-                  : "border-border bg-muted text-muted-foreground/60",
-              )}
-            >
-              <span>{b.emoji}</span>
-              {b.label}
-            </span>
-          );
-        })}
-      </div>
-
-      <p className="mt-3 text-sm text-muted-foreground">
-        {badge ? (
-          <>
-            現在の称号：
-            <span className="font-semibold text-accent">
-              {badge.emoji} {badge.label}
-            </span>
-          </>
-        ) : (
-          "最初のメニューをクリアすると、スタンプが押されます。"
-        )}
-        {upcoming && (
-          <>
-            {" "}
-            あと {upcoming.threshold - count} 個で「{upcoming.label}」獲得！
-          </>
-        )}
-      </p>
+      </ul>
     </section>
   );
 }
