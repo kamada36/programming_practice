@@ -7,15 +7,15 @@
  * 温かみのあるクリーム地に、コーヒーブラウンとアンバーのアクセント。
  */
 :root {
-  --background: 40 43% 98%; /* #FDFBF7 クリーム */
-  --surface: 0 0% 100%; /* #FFFFFF */
-  --foreground: 20 20% 14%; /* #2C221E ダークブラウン */
-  --muted: 38 32% 94%;
-  --muted-foreground: 25 12% 40%;
-  --border: 35 26% 88%;
-  --primary: 25 51% 28%; /* #6B4423 コーヒーブラウン */
-  --primary-foreground: 40 43% 98%;
-  --accent: 32 95% 44%; /* #D97706 アンバー */
+  --background: 38 33% 92%; /* #EFE8DA 深めのクリーム（白い面が浮くように） */
+  --surface: 40 60% 99%; /* #FFFDF8 ほぼ白 */
+  --foreground: 20 22% 13%; /* #2A2017 ダークブラウン */
+  --muted: 37 26% 86%; /* #E5DBC9 チップ・二次ボタンの下地 */
+  --muted-foreground: 25 14% 35%;
+  --border: 34 20% 78%; /* #CDC1AE はっきり見える境界 */
+  --primary: 24 56% 25%; /* #663A1B コーヒーブラウン（濃いめ） */
+  --primary-foreground: 40 50% 98%;
+  --accent: 28 95% 40%; /* #C66205 アンバー（文字でも読める濃さ） */
   --accent-foreground: 0 0% 100%;
 }
 

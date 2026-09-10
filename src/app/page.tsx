@@ -4,6 +4,8 @@ import { LEVELS, getCatalog, levelTone, recipeId, toLessonRow } from "@/lib/mdx"
 import { CategoryCard } from "@/components/CategoryCard";
 import { LessonGroup } from "@/components/LessonGroup";
 import { StampCard } from "@/components/StampCard";
+import { ArticleFooter } from "@/components/ArticleFooter";
+import { SponsoredPlaceholder } from "@/components/SponsoredPlaceholder";
 import { cn } from "@/lib/utils";
 
 export default function HomePage() {
@@ -157,6 +159,23 @@ export default function HomePage() {
         </section>
       ))}
 
+      {/* サイトの背景・運営者と、静かなブログ導線 */}
+      <section className="border-t border-border/60 py-8 sm:py-10">
+        <h2 className="text-lg font-semibold text-foreground sm:text-xl">
+          このサイトについて
+        </h2>
+        <p className="mt-1 max-w-md text-sm leading-relaxed text-muted-foreground">
+          「コード・カフェ」は、ブログ「Resilencer Cafe」の実践編として作った
+          無料の練習サイトです。
+        </p>
+        <div className="mt-4 space-y-4">
+          <ArticleFooter />
+          <SponsoredPlaceholder
+            variant="rectangle"
+            note="候補：トップ最下部（このサイトについて の中）"
+          />
+        </div>
+      </section>
     </div>
   );
 }

@@ -207,20 +207,27 @@ export function QuizChallenge({
                       aria-label={`穴埋め ${i + 1}`}
                       value={selected[i] ?? ""}
                       onChange={(e) => handleSelect(i, e.target.value)}
+                      style={{ colorScheme: "dark" }}
                       className={cn(
-                        "mx-1 rounded-md border px-1.5 py-0.5 align-middle font-mono text-[13px] outline-none",
+                        "mx-1 rounded-md border px-1.5 py-1 align-middle font-mono text-[13px] font-semibold outline-none",
                         selected[i] == null
-                          ? "border-amber-400 bg-amber-400/15 text-amber-300"
+                          ? "border-amber-300 bg-amber-950 text-amber-100"
                           : checked && !labelIsCorrect(selected[i])
-                            ? "border-red-400 bg-red-400/15 text-red-300"
-                            : "border-accent bg-accent/20 text-amber-200",
+                            ? "border-red-400 bg-red-950 text-red-100"
+                            : checked
+                              ? "border-emerald-400 bg-emerald-950 text-emerald-100"
+                              : "border-stone-400 bg-stone-800 text-stone-50",
                       )}
                     >
-                      <option value="" disabled>
+                      <option value="" disabled className="bg-[#242424] text-stone-400">
                         ???
                       </option>
                       {shuffledOptions.map((o) => (
-                        <option key={o.label} value={o.label}>
+                        <option
+                          key={o.label}
+                          value={o.label}
+                          className="bg-[#242424] font-normal text-stone-50"
+                        >
                           {o.label}
                         </option>
                       ))}

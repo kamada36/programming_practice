@@ -14,6 +14,7 @@ import {
 import { LessonRow } from "@/components/LessonRow";
 import { LevelSwitcher } from "@/components/LevelSwitcher";
 import { Progress } from "@/components/Progress";
+import { SponsoredPlaceholder } from "@/components/SponsoredPlaceholder";
 import { levelTone } from "@/lib/catalog";
 import { cn } from "@/lib/utils";
 
@@ -102,6 +103,12 @@ export default function LevelListPage({ params }: PageProps) {
           <LayoutList className="h-4 w-4" />
           {category.shortLabel} のメニューをすべて見る
         </Link>
+
+        <SponsoredPlaceholder
+          variant="inline"
+          note="候補：難易度別の一覧の最下部（控えめに）"
+          className="mt-6"
+        />
       </div>
     </div>
   );
