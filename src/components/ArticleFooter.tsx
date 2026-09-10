@@ -2,8 +2,8 @@ import { ExternalLink } from "lucide-react";
 import { BLOG } from "@/lib/site";
 
 /**
- * 記事末尾の運営者プロフィール。NextStepCard のすぐ下に置く。
- * 小さく・自然に。「誰が書いているか」を示しつつ、静かにブログへ導く。
+ * 記事末尾などに置く運営者プロフィール。
+ * 「誰が作っているか」を示すのが主で、ブログへは押し付けず「よかったらどうぞ」の温度。
  */
 export function ArticleFooter() {
   return (
@@ -15,7 +15,10 @@ export function ArticleFooter() {
         レ
       </span>
       <div className="min-w-0">
-        <p className="text-sm font-semibold text-foreground">
+        <p className="text-[11px] font-medium tracking-wide text-muted-foreground">
+          運営者
+        </p>
+        <p className="mt-0.5 text-sm font-semibold text-foreground">
           {BLOG.author}
           <span className="ml-1 font-normal text-muted-foreground">
             ／ {BLOG.name}
@@ -30,7 +33,7 @@ export function ArticleFooter() {
           rel="noopener noreferrer"
           className="mt-1.5 inline-flex items-center gap-1 text-xs font-medium text-accent transition-colors hover:text-accent/80"
         >
-          ブログを見る
+          よかったら、ブログものぞいてみてください
           <ExternalLink className="h-3 w-3" />
         </a>
       </div>

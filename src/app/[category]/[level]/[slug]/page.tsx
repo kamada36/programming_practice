@@ -144,14 +144,16 @@ export default function RecipePage({ params }: PageProps) {
         categoryLabel={category.shortLabel}
       />
 
-      {/* 読み終えた人にだけ静かに見える、本命ブログへの案内 */}
+      {/* 読み終えた人にだけ静かに見える、運営者・関連記事の案内 */}
       <div className="mt-12 space-y-4 border-t border-border/60 pt-8">
-        <NextStepCard
-          title={nextStep.title}
-          description={nextStep.description}
-          linkLabel={nextStep.linkLabel}
-          href={nextStep.href}
-        />
+        {nextStep && (
+          <NextStepCard
+            title={nextStep.title}
+            description={nextStep.description}
+            linkLabel={nextStep.linkLabel}
+            href={nextStep.href}
+          />
+        )}
         <ArticleFooter />
 
         {/* 【仮】広告の位置イメージ・候補B：フッター（ブログ案内・プロフィール）の下 */}

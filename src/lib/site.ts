@@ -16,15 +16,6 @@ export const BLOG = {
     "10年の製造業からIT転職した経験をもとに、挫折しないWeb学習法をブログで配信中。",
 } as const;
 
-/** frontmatter に nextStep が無いときに表示する既定案内（ブログトップへ）。 */
-export const DEFAULT_NEXT_STEP = {
-  title: "☕ 次のステップへ",
-  description:
-    "未経験からWebエンジニアを目指すための学習の進め方や、独学でつまずかないコツをブログにまとめています。",
-  href: BLOG.url,
-  linkLabel: `${BLOG.name} で読む`,
-} as const;
-
 export interface ResolvedNextStep {
   title: string;
   description: string;
@@ -39,17 +30,18 @@ function unwrapMarkdownLink(url: string): string {
 }
 
 /**
- * frontmatter の nextStep を表示用に整える。
- * 必須項目（title / description / url）が欠けていれば既定案内にフォールバック。
+ * frontmatter の nextStep（＝この題材に関連するブログ記事）を表示用に整える。
+ * 「次にやること」ではなく、あくまで関連する読み物の紹介。
+ * 必須項目（title / description / url）が揃っていなければ null（カードを出さない）。
  */
-export function resolveNextStep(nextStep?: NextStep): ResolvedNextStep {
+export function resolveNextStep(nextStep?: NextStep): ResolvedNextStep | null {
   if (nextStep?.title && nextStep?.description && nextStep?.url) {
     return {
       title: nextStep.title,
       description: nextStep.description,
       href: unwrapMarkdownLink(nextStep.url),
-      linkLabel: nextStep.linkLabel?.trim() || `${BLOG.name} で記事を読む`,
+      linkLabel: nextStep.linkLabel?.trim() || "ブログで読む",
     };
   }
-  return { ...DEFAULT_NEXT_STEP };
+  return null;
 }

@@ -12,7 +12,8 @@ interface NextStepCardProps {
 }
 
 /**
- * 記事を読み終えた最下部にひっそり置く「読み物」カード。
+ * この題材に関連するブログ記事を、記事の最下部でそっと紹介するカード。
+ * 「次にやること」ではなく、あくまで関連する読み物の案内。
  * 広告バナーではなく、カフェのショップカードのように風景へ溶け込ませる。
  * 割り込みなし・プル型（スクロールした人の目にだけ入る）。
  */
@@ -24,8 +25,8 @@ export function NextStepCard({
 }: NextStepCardProps) {
   return (
     <aside className="rounded-2xl border border-[#E6DFD5] bg-[#F9F6F0] p-5 dark:border-border dark:bg-surface">
-      <p className="text-[11px] font-medium uppercase tracking-wider text-muted-foreground">
-        読み物
+      <p className="text-[11px] font-medium tracking-wide text-muted-foreground">
+        このテーマの関連記事
       </p>
       <h2 className="mt-1.5 text-base font-bold leading-snug text-foreground">
         {title}

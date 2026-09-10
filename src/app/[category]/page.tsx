@@ -13,10 +13,8 @@ import { LessonGroup } from "@/components/LessonGroup";
 import { LevelSwitcher } from "@/components/LevelSwitcher";
 import { Progress } from "@/components/Progress";
 import { ResumeButton } from "@/components/ResumeButton";
-import { NextStepCard } from "@/components/NextStepCard";
 import { ArticleFooter } from "@/components/ArticleFooter";
 import { SponsoredPlaceholder } from "@/components/SponsoredPlaceholder";
-import { resolveNextStep } from "@/lib/site";
 
 interface PageProps {
   params: { category: string };
@@ -113,9 +111,6 @@ export default function CategoryPage({ params }: PageProps) {
       </div>
 
       <div className="mt-12 space-y-4 border-t border-border/60 pt-8">
-        <NextStepCard
-          {...resolveNextStep()}
-        />
         <ArticleFooter />
         <SponsoredPlaceholder
           variant="banner"
