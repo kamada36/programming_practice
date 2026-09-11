@@ -1,0 +1,83 @@
+---
+title: 文字色と背景色を変える
+description: color と background-color で、カードの見た目を好きな色に変える。
+language: html
+kind: web
+difficulty: 入門
+emoji: 🎨
+order: 1
+minutes: 2
+starterCode: |
+  <!DOCTYPE html>
+  <html lang="ja">
+  <head>
+    <meta charset="UTF-8" />
+    <style>
+      body {
+        font-family: system-ui, sans-serif;
+        display: grid;
+        place-items: center;
+        height: 100vh;
+        margin: 0;
+        background: #fdfbf7;
+      }
+      .card {
+        background-color: #ffe8cc;
+        color: #6b4423;
+        padding: 1.5rem 2rem;
+        border-radius: 16px;
+        font-size: 1.2rem;
+        font-weight: 600;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="card">今日のおすすめ ☕</div>
+  </body>
+  </html>
+practiceHint: "background-colorとcolorの色コード（例：#ffe8cc）を、好きな色に変えてみよう。"
+quiz:
+  question: "要素の背景色を指定するCSSプロパティはどれ？"
+  codeSnippet: |
+    .card {
+      ___CHOICE___: #ffe8cc;
+      color: #6b4423;
+    }
+  options:
+    - label: "background-color"
+      isCorrect: true
+    - label: "color"
+      isCorrect: false
+    - label: "font-color"
+      isCorrect: false
+  explanation: "background-colorは背景の色、colorは文字の色を指定します。font-colorというプロパティはCSSに存在しません（文字色は必ずcolorです）。"
+---
+
+## 何をしているの？
+
+CSSは「どの要素に」「どんな見た目を」つけるかを指定する言語です。
+
+```css
+.card {
+  background-color: #ffe8cc;
+  color: #6b4423;
+}
+```
+
+`.card` は **セレクタ**（`class="card"` が付いた要素を選ぶ）、
+`{ }` の中がその要素に適用する **プロパティ：値** のペアです。
+
+- `background-color` … 背景の色
+- `color` … 文字の色
+
+色は `#ffe8cc` のような16進数コードのほか、`orange` のような色名でも指定できます。
+
+<Callout>
+`background-color` と `background` は似ていますが、`background` は背景画像や
+グラデーションなど、もっと多くの指定をまとめて書けるプロパティです。
+</Callout>
+
+## 次の一歩
+
+`padding`（内側の余白）の数値を大きくすると、カードがひとまわり大きく、
+ゆったりした見た目になります。試してみましょう。

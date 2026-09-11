@@ -1,0 +1,95 @@
+---
+title: 画像とテーブルでプロフィールカードを作る
+description: imgタグで写真を表示し、tableタグで項目と値を表にまとめる。
+language: html
+kind: web
+difficulty: 中級
+emoji: 🖼️
+order: 3
+minutes: 4
+starterCode: |
+  <!DOCTYPE html>
+  <html lang="ja">
+  <head>
+    <meta charset="UTF-8" />
+    <style>
+      body {
+        font-family: system-ui, sans-serif;
+        max-width: 480px;
+        margin: 2rem auto;
+        padding: 0 1rem;
+        background: #fdfbf7;
+        color: #2c221e;
+        line-height: 1.7;
+      }
+      img { border-radius: 12px; }
+      table { border-collapse: collapse; margin-top: 1rem; }
+      th, td { border: 1px solid #d9cfc4; padding: 0.4rem 0.8rem; text-align: left; }
+      th { background: #f1e9dd; }
+    </style>
+  </head>
+  <body>
+    <img src="https://placehold.co/160x160/6b4423/fdfbf7?text=Cafe" alt="プロフィール写真" width="160" height="160" />
+
+    <table>
+      <tr>
+        <th>名前</th>
+        <td>レジサン</td>
+      </tr>
+      <tr>
+        <th>好きな言語</th>
+        <td>HTML</td>
+      </tr>
+      <tr>
+        <th>好きな飲み物</th>
+        <td>ドリップコーヒー</td>
+      </tr>
+    </table>
+  </body>
+  </html>
+practiceHint: "tableに行（tr）を1つ追加して、「趣味」など好きな項目を足してみよう。"
+quiz:
+  question: "画像に「何が写っているか」を説明するテキストを指定する属性はどれ？"
+  codeSnippet: |
+    <img src="https://placehold.co/160x160" ___CHOICE___="プロフィール写真" />
+  options:
+    - label: "alt"
+      isCorrect: true
+    - label: "title"
+      isCorrect: false
+    - label: "caption"
+      isCorrect: false
+  explanation: "alt属性は画像が表示できないときの代替テキストで、読み上げソフトにも使われる大切な情報です。titleは補足のツールチップ、captionというHTML属性は存在しません。"
+---
+
+## 何をしているの？
+
+画像は `<img>` タグ1つで表示できます（閉じタグはありません）。
+
+```html
+<img src="画像のURL" alt="画像の説明" width="160" height="160" />
+```
+
+- `src` … 画像ファイルの場所（URL）
+- `alt` … 画像が見えない人・環境向けの説明文
+- `width` / `height` … 表示サイズ
+
+表は `<table>` の中に、行を表す `<tr>`、その中に見出しセル `<th>` と
+データセル `<td>` を並べて作ります。
+
+```html
+<tr>
+  <th>名前</th>
+  <td>レジサン</td>
+</tr>
+```
+
+<Callout type="warn">
+`alt` を空のままにすると、画像の内容が伝わらない人がいます。
+飾りだけの画像でなければ、必ず中身のある説明を書きましょう。
+</Callout>
+
+## 次の一歩
+
+`<th>` を各行の先頭ではなく、表の一番上の行にまとめて置くと、
+「項目名の行」と「データの行」がはっきり分かれた表になります。

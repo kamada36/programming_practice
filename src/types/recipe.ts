@@ -98,15 +98,30 @@ export interface Recipe {
   content: string;
 }
 
+/** 言語のジャンル（トップ・ナビでの見出しグルーピング用）。 */
+export type Genre = "frontend" | "backend";
+
+/** ジャンルのメタ情報。 */
+export interface GenreMeta {
+  slug: Genre;
+  /** 見出しラベル（例: "フロントエンド"） */
+  label: string;
+  emoji: string;
+  /** 見出し直下に添える短い説明。 */
+  description: string;
+}
+
 /** カテゴリのメタ情報。 */
 export interface CategoryMeta {
   slug: string;
-  /** 正式名称（例: "HTML / CSS / JavaScript"） */
+  /** 正式名称（例: "JavaScript"） */
   label: string;
-  /** ナビ・見出し用の短い名前（例: "Web"） */
+  /** ナビ・見出し用の短い名前（例: "JavaScript"） */
   shortLabel: string;
   emoji: string;
   description: string;
+  /** どのジャンルに属するか（トップ・ナビの見出しグルーピングに使用） */
+  genre: Genre;
 }
 
 /** 難易度（〜編）のメタ情報。 */

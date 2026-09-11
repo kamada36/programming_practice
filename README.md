@@ -103,7 +103,11 @@ nextStep:
 本文（解説）。<Callout> と <CodePlayground> が使えます。
 ```
 
-3. 新しいカテゴリを足す場合は `src/lib/catalog.ts` の `CATEGORIES` に追記。
+3. 新しいカテゴリを足す場合は `src/lib/catalog.ts` の `CATEGORIES` に追記（`genre` に
+   `frontend` / `backend` のどちらかを指定すると、トップページの見出しグルーピングに反映される）。
+
+現在のカテゴリ： `html` / `css` / `javascript`（フロントエンド）、`python` / `ruby`
+（サーバーサイド／その他）。いずれも `content/<category>/` 配下に対応するディレクトリを持つ。
 
 ## Piston 実行対応言語
 

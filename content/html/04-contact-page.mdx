@@ -1,0 +1,119 @@
+---
+title: 構造タグとフォームでミニ問い合わせページを作る
+description: header・main・footerでページを区切り、フォーム部品で入力欄をまとめる。
+language: html
+kind: web
+difficulty: 上級
+emoji: 📮
+order: 4
+minutes: 6
+starterCode: |
+  <!DOCTYPE html>
+  <html lang="ja">
+  <head>
+    <meta charset="UTF-8" />
+    <style>
+      body {
+        font-family: system-ui, sans-serif;
+        max-width: 480px;
+        margin: 0 auto;
+        padding: 1.5rem 1rem;
+        background: #fdfbf7;
+        color: #2c221e;
+        line-height: 1.7;
+      }
+      header, footer { color: #6b4423; }
+      label { display: block; margin-top: 0.9rem; font-weight: 600; }
+      input, select, textarea {
+        width: 100%; margin-top: 0.3rem; padding: 0.5rem;
+        border: 1px solid #d9cfc4; border-radius: 8px; font: inherit; box-sizing: border-box;
+      }
+      button {
+        margin-top: 1.2rem; padding: 0.6rem 1.2rem; border: none;
+        border-radius: 8px; background: #6b4423; color: #fff; cursor: pointer;
+      }
+      footer { margin-top: 2rem; font-size: 0.85rem; border-top: 1px solid #eee; padding-top: 0.8rem; }
+    </style>
+  </head>
+  <body>
+    <header>
+      <h1>コード・カフェ 問い合わせ</h1>
+    </header>
+
+    <main>
+      <form>
+        <label for="name">お名前</label>
+        <input id="name" type="text" placeholder="山田 太郎" />
+
+        <label for="email">メールアドレス</label>
+        <input id="email" type="email" placeholder="you@example.com" />
+
+        <label for="topic">お問い合わせ内容</label>
+        <select id="topic">
+          <option>メニューについて</option>
+          <option>営業時間について</option>
+          <option>その他</option>
+        </select>
+
+        <label for="message">メッセージ</label>
+        <textarea id="message" rows="3"></textarea>
+
+        <button type="button">送信する（見本のため実際には送信されません）</button>
+      </form>
+    </main>
+
+    <footer>
+      <p>&copy; コード・カフェ</p>
+    </footer>
+  </body>
+  </html>
+practiceHint: "selectのoptionを1つ追加して、問い合わせ内容の選択肢を増やしてみよう。"
+quiz:
+  question: "ページの一番上にある「タイトル部分」をまとめる、意味のあるタグはどれ？"
+  codeSnippet: |
+    <___CHOICE___>
+      <h1>コード・カフェ 問い合わせ</h1>
+    </___CHOICE___>
+  options:
+    - label: "header"
+      isCorrect: true
+    - label: "head"
+      isCorrect: false
+    - label: "top"
+      isCorrect: false
+  explanation: "<header>はページ（やセクション）の導入部分を表す意味のあるタグです。<head>はページの中身ではなくメタ情報（titleやCSSの読み込みなど）を書く場所なので、画面には表示されません。"
+---
+
+## 何をしているの？
+
+ページ全体を意味のあるブロックに区切ると、内容が伝わりやすくなります。
+
+```html
+<header>...</header>
+<main>...</main>
+<footer>...</footer>
+```
+
+- `<header>` … ページ（や記事）の導入部分
+- `<main>` … そのページの主役となる内容（1ページに1つ）
+- `<footer>` … 補足情報や著作権表示など
+
+フォームの部品もそれぞれ役割が決まっています。
+
+```html
+<label for="name">お名前</label>
+<input id="name" type="text" />
+```
+
+`label` の `for` と `input` の `id` を同じ値にすると、
+ラベルをクリックしただけで入力欄にカーソルが移動します。
+
+<Callout>
+`select` はドロップダウンの選択肢、`textarea` は複数行の入力欄です。
+`input`だけでは表現できない入力パターンをカバーしてくれます。
+</Callout>
+
+## 次の一歩
+
+`input type="text"` を `type="tel"`（電話番号）や `type="date"`（日付）に変えると、
+スマートフォンで最適な入力キーボードが自動で表示されます。

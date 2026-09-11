@@ -1,0 +1,84 @@
+---
+title: リストとリンクでメニュー表を作る
+description: ul・liで項目を並べ、aタグでページ内・外部へのリンクを貼る。
+language: html
+kind: web
+difficulty: 初級
+emoji: 📋
+order: 2
+minutes: 3
+starterCode: |
+  <!DOCTYPE html>
+  <html lang="ja">
+  <head>
+    <meta charset="UTF-8" />
+    <style>
+      body {
+        font-family: system-ui, sans-serif;
+        max-width: 480px;
+        margin: 2rem auto;
+        padding: 0 1rem;
+        background: #fdfbf7;
+        color: #2c221e;
+        line-height: 1.7;
+      }
+      h1 { color: #6b4423; }
+      a { color: #d97706; }
+    </style>
+  </head>
+  <body>
+    <h1 id="menu">今日のメニュー</h1>
+    <ul>
+      <li>ドリップコーヒー ¥480</li>
+      <li>カフェラテ ¥520</li>
+      <li>ほうじ茶ラテ ¥500</li>
+    </ul>
+
+    <p><a href="#menu">↑ メニューの先頭へ戻る</a></p>
+    <p><a href="https://example.com" target="_blank" rel="noopener">お店の詳しい情報（外部サイト）</a></p>
+  </body>
+  </html>
+practiceHint: "ulの中にliを1つ追加して、好きなメニューを足してみよう。値段も自由に決めてOK。"
+quiz:
+  question: "リンクを作るとき、飛び先のURLを指定する属性はどれ？"
+  codeSnippet: |
+    <a ___CHOICE___="https://example.com">お店の詳しい情報</a>
+  options:
+    - label: "href"
+      isCorrect: true
+    - label: "src"
+      isCorrect: false
+    - label: "link"
+      isCorrect: false
+  explanation: "<a>タグの飛び先はhref属性で指定します。srcは画像や動画などの読み込み元を指す属性で、リンク先には使いません。"
+---
+
+## 何をしているの？
+
+複数の項目を並べるときは `<ul>`（順序なしリスト）と `<li>`（項目）を使います。
+
+```html
+<ul>
+  <li>ドリップコーヒー ¥480</li>
+  <li>カフェラテ ¥520</li>
+</ul>
+```
+
+リンクは `<a href="飛び先">表示する文字</a>` です。
+
+```html
+<a href="#menu">↑ メニューの先頭へ戻る</a>
+```
+
+`href="#menu"` のように `#` から始めると、**同じページの中の要素** へジャンプできます。
+飛び先は `id="menu"` を付けた要素です。
+
+<Callout>
+外部サイトへのリンクに `target="_blank"` を付けると新しいタブで開きます。
+セキュリティ対策として `rel="noopener"` もセットで書くのが定番です。
+</Callout>
+
+## 次の一歩
+
+番号付きの手順を書きたいときは `<ul>` の代わりに `<ol>`（ordered list）を使います。
+タグを変えるだけで、自動的に「1. 2. 3.」の番号が付きます。

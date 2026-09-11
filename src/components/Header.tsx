@@ -1,6 +1,7 @@
 import Link from "next/link";
 import { Coffee } from "lucide-react";
 import { CATEGORIES, getAllRecipes } from "@/lib/mdx";
+import { Fragment } from "react";
 import { StampBadge } from "@/components/StampBadge";
 import { BLOG } from "@/lib/site";
 
@@ -27,14 +28,18 @@ export function Header() {
 
         <div className="flex shrink-0 items-center gap-1 sm:gap-2">
           <nav className="hidden items-center gap-0.5 md:flex">
-            {CATEGORIES.map((c) => (
-              <Link
-                key={c.slug}
-                href={`/${c.slug}/`}
-                className="rounded-lg px-3 py-2 text-sm text-muted-foreground transition-colors hover:bg-muted hover:text-foreground"
-              >
-                <span aria-hidden>{c.emoji}</span> {c.shortLabel}
-              </Link>
+            {CATEGORIES.map((c, i) => (
+              <Fragment key={c.slug}>
+                {i > 0 && CATEGORIES[i - 1].genre !== c.genre && (
+                  <span className="mx-1 h-4 w-px bg-border" aria-hidden />
+                )}
+                <Link
+                  href={`/${c.slug}/`}
+                  className="rounded-lg px-3 py-2 text-sm text-muted-foreground transition-colors hover:bg-muted hover:text-foreground"
+                >
+                  <span aria-hidden>{c.emoji}</span> {c.shortLabel}
+                </Link>
+              </Fragment>
             ))}
           </nav>
           <a

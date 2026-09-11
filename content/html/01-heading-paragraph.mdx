@@ -1,0 +1,76 @@
+---
+title: 見出しと段落で自己紹介ページを作る
+description: h1・h2・pタグを使って、シンプルな自己紹介ページを組み立てる最初の一歩。
+language: html
+kind: web
+difficulty: 入門
+emoji: 📝
+order: 1
+minutes: 2
+starterCode: |
+  <!DOCTYPE html>
+  <html lang="ja">
+  <head>
+    <meta charset="UTF-8" />
+    <style>
+      body {
+        font-family: system-ui, sans-serif;
+        max-width: 480px;
+        margin: 2rem auto;
+        padding: 0 1rem;
+        background: #fdfbf7;
+        color: #2c221e;
+        line-height: 1.7;
+      }
+      h1 { color: #6b4423; }
+    </style>
+  </head>
+  <body>
+    <h1>コード・カフェへようこそ</h1>
+    <h2>自己紹介</h2>
+    <p>プログラミングの練習中です。毎日すこしずつコードを書いています。</p>
+
+    <h2>好きな飲み物</h2>
+    <p>ドリップコーヒーが好きです。</p>
+  </body>
+  </html>
+practiceHint: "h1の文字を自分の名前に、pの中身を自分の好きなことに書き換えてみよう。h2を増やしてもOK。"
+quiz:
+  question: "ページの中でいちばん大きな見出しを作るタグはどれ？"
+  codeSnippet: |
+    <___CHOICE___>コード・カフェへようこそ</___CHOICE___>
+    <p>プログラミングの練習中です。</p>
+  options:
+    - label: "h1"
+      isCorrect: true
+    - label: "div"
+      isCorrect: false
+    - label: "span"
+      isCorrect: false
+  explanation: "h1〜h6は見出し専用のタグで、数字が小さいほど大きく重要な見出しになります。divやspanは見出し用の意味を持たない「ただの箱」です。"
+---
+
+## 何をしているの？
+
+HTMLは、文章に **タグで意味をつける** 言語です。
+
+```html
+<h1>コード・カフェへようこそ</h1>
+<h2>自己紹介</h2>
+<p>プログラミングの練習中です。</p>
+```
+
+- `<h1>` 〜 `<h2>` … 見出し（数字が小さいほど大きい・重要）
+- `<p>` … 段落（ひとまとまりの文章）
+
+見た目のサイズはブラウザが自動でつけてくれるので、
+「これは見出し」「これは本文」という **意味** を書くことに集中できます。
+
+<Callout>
+`<h1>` はページに1つだけ置くのが基本です。ページ全体のタイトルという役割だからです。
+</Callout>
+
+## 次の一歩
+
+`<h2>` をもう1つ増やして、新しい話題（「今日の目標」など）を書き足してみましょう。
+`<h2>` の下に `<p>` を続けると、見出し＋本文の1セットになります。

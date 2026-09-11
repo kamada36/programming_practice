@@ -1,0 +1,89 @@
+---
+title: 余白と枠線でカードを整える
+description: padding・border・border-radius・box-shadowで、四角い箱を心地よく整える。
+language: html
+kind: web
+difficulty: 初級
+emoji: 📦
+order: 2
+minutes: 3
+starterCode: |
+  <!DOCTYPE html>
+  <html lang="ja">
+  <head>
+    <meta charset="UTF-8" />
+    <style>
+      body {
+        font-family: system-ui, sans-serif;
+        display: grid;
+        place-items: center;
+        height: 100vh;
+        margin: 0;
+        background: #fdfbf7;
+      }
+      .card {
+        background: #fff;
+        padding: 1.5rem;
+        border: 1px solid #d9cfc4;
+        border-radius: 12px;
+        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.08);
+        max-width: 260px;
+      }
+      .card h2 { margin: 0 0 0.4rem; color: #6b4423; }
+      .card p { margin: 0; color: #57493c; }
+    </style>
+  </head>
+  <body>
+    <div class="card">
+      <h2>ドリップコーヒー</h2>
+      <p>豆本来の香りを楽しめる、定番の一杯。</p>
+    </div>
+  </body>
+  </html>
+practiceHint: "border-radiusの数値を0にすると角ばった箱に、48pxにすると丸いカプセル状になります。試してみよう。"
+quiz:
+  question: "カードの角を丸くするCSSプロパティはどれ？"
+  codeSnippet: |
+    .card {
+      border: 1px solid #d9cfc4;
+      ___CHOICE___: 12px;
+    }
+  options:
+    - label: "border-radius"
+      isCorrect: true
+    - label: "border-width"
+      isCorrect: false
+    - label: "corner-radius"
+      isCorrect: false
+  explanation: "border-radiusは要素の角を丸める専用のプロパティです。border-widthは枠線の太さを指定し、corner-radiusというプロパティはCSSに存在しません。"
+---
+
+## 何をしているの？
+
+すべてのHTML要素は、内側から順に「内容 → padding（内側の余白）→
+border（枠線）→ margin（外側の余白）」という **箱** になっています。
+これを **ボックスモデル** と呼びます。
+
+```css
+.card {
+  padding: 1.5rem;
+  border: 1px solid #d9cfc4;
+  border-radius: 12px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.08);
+}
+```
+
+- `padding` … 内容と枠線のあいだの余白
+- `border` … 枠線（太さ・種類・色）
+- `border-radius` … 角の丸み
+- `box-shadow` … 影（ぼかし・色を指定して立体感を出す）
+
+<Callout>
+`padding` を大きくしすぎると箱全体が広がってしまいます。
+「箱の中の余白は padding、箱と箱のあいだの余白は margin」と覚えると混乱しません。
+</Callout>
+
+## 次の一歩
+
+`box-shadow` の数値（`0 4px 10px`）を `0 8px 20px` にすると、
+影がより大きく柔らかくなり、カードが「浮いて」見えるようになります。

@@ -4,17 +4,57 @@
  * サーバー専用の MDX 読み込みは `src/lib/mdx.ts` にある。
  * クライアントコンポーネントからはこのファイルだけを import すること。
  */
-import type { CategoryMeta, Difficulty, LevelMeta } from "@/types/recipe";
+import type {
+  CategoryMeta,
+  Difficulty,
+  GenreMeta,
+  LevelMeta,
+} from "@/types/recipe";
+
+/** 言語のジャンル定義（表示順）。トップ・ヘッダーの見出しグルーピングに使う。 */
+export const GENRES: GenreMeta[] = [
+  {
+    slug: "frontend",
+    label: "フロントエンド",
+    emoji: "🖥️",
+    description: "ブラウザで見た目や動きを作る言語。まずはここから。",
+  },
+  {
+    slug: "backend",
+    label: "サーバーサイド／その他",
+    emoji: "🗄️",
+    description: "データ処理や自動化など、画面の裏側で動く処理を書く言語。",
+  },
+];
 
 /** サイトで扱うカテゴリの定義（表示順）。 */
 export const CATEGORIES: CategoryMeta[] = [
   {
-    slug: "web",
-    label: "HTML / CSS / JavaScript",
-    shortLabel: "Web",
-    emoji: "🌐",
+    slug: "html",
+    label: "HTML",
+    shortLabel: "HTML",
+    emoji: "📄",
     description:
-      "ボタン、アニメーション、ミニアプリ。ブラウザの中でそのまま動きます。",
+      "見出し・段落・リンク・画像・フォーム。タグでページの土台を組み立てます。",
+    genre: "frontend",
+  },
+  {
+    slug: "css",
+    label: "CSS",
+    shortLabel: "CSS",
+    emoji: "🎨",
+    description:
+      "色・余白・配置を指定して見た目を整える。Flexboxやアニメーションも。",
+    genre: "frontend",
+  },
+  {
+    slug: "javascript",
+    label: "JavaScript",
+    shortLabel: "JavaScript",
+    emoji: "⚡",
+    description:
+      "ボタン、アニメーション、ミニアプリ。ブラウザの中で画面を動かします。",
+    genre: "frontend",
   },
   {
     slug: "python",
@@ -22,6 +62,7 @@ export const CATEGORIES: CategoryMeta[] = [
     shortLabel: "Python",
     emoji: "🐍",
     description: "データ処理や自動化の入り口。書いてすぐ結果を確認できます。",
+    genre: "backend",
   },
   {
     slug: "ruby",
@@ -29,8 +70,16 @@ export const CATEGORIES: CategoryMeta[] = [
     shortLabel: "Ruby",
     emoji: "💎",
     description: "読みやすくて、書くのが楽しい言語。短い題材で手を動かします。",
+    genre: "backend",
   },
 ];
+
+const GENRE_MAP = new Map<string, GenreMeta>(GENRES.map((g) => [g.slug, g]));
+
+/** ジャンルスラッグからメタ情報を取得する。 */
+export function getGenre(slug: string): GenreMeta | undefined {
+  return GENRE_MAP.get(slug);
+}
 
 /** 難易度（〜編）の定義（表示順）。 */
 export const LEVELS: LevelMeta[] = [

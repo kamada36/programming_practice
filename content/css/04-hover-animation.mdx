@@ -1,0 +1,108 @@
+---
+title: ホバーアニメーションでボタンを演出する
+description: transition・transform・:hoverと@keyframesで、押せそうなボタンを作るミニ演出。
+language: html
+kind: web
+difficulty: 上級
+emoji: ✨
+order: 4
+minutes: 6
+starterCode: |
+  <!DOCTYPE html>
+  <html lang="ja">
+  <head>
+    <meta charset="UTF-8" />
+    <style>
+      body {
+        font-family: system-ui, sans-serif;
+        display: grid;
+        place-items: center;
+        height: 100vh;
+        margin: 0;
+        background: #2c221e;
+      }
+      @keyframes fadeIn {
+        from { opacity: 0; transform: translateY(8px); }
+        to { opacity: 1; transform: translateY(0); }
+      }
+      .btn {
+        font-size: 1.1rem;
+        padding: 0.9rem 1.8rem;
+        border: none;
+        border-radius: 14px;
+        background: #d97706;
+        color: #fff;
+        cursor: pointer;
+        box-shadow: 0 4px 12px rgba(217, 119, 6, 0.35);
+        transition: transform 0.2s, box-shadow 0.2s;
+        animation: fadeIn 0.5s ease-out;
+      }
+      .btn:hover {
+        transform: translateY(-3px);
+        box-shadow: 0 8px 18px rgba(217, 119, 6, 0.45);
+      }
+    </style>
+  </head>
+  <body>
+    <button class="btn">今日の一杯を注文する</button>
+  </body>
+  </html>
+practiceHint: "transitionの0.2sを0.6sにすると動きがゆっくりに、0.05sにすると一瞬になります。試してみよう。"
+quiz:
+  question: "マウスを乗せたときだけスタイルを変えるセレクタはどれ？"
+  codeSnippet: |
+    .btn___CHOICE___ {
+      transform: translateY(-3px);
+    }
+  options:
+    - label: ":hover"
+      isCorrect: true
+    - label: ":active"
+      isCorrect: false
+    - label: ":focus"
+      isCorrect: false
+  explanation: ":hoverはマウスカーソルが乗っている間だけ適用される疑似クラスです。:activeはクリックしている瞬間、:focusはキーボード操作などで選択されている間に適用されます。"
+---
+
+## 何をしているの？
+
+`:hover` は「マウスが乗っているあいだだけ」スタイルを変える疑似クラスです。
+
+```css
+.btn {
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+.btn:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 8px 18px rgba(217, 119, 6, 0.45);
+}
+```
+
+`transition` を書いておくと、`:hover` で値が変わる瞬間が
+**カクッ** ではなく **なめらか** になります。指定した時間（ここでは0.2秒）
+かけて値が変化します。
+
+ページが表示された瞬間の演出には `@keyframes` を使います。
+
+```css
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(8px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+.btn {
+  animation: fadeIn 0.5s ease-out;
+}
+```
+
+`from` が開始時点、`to` が終了時点の見た目です。ボタンがふわっと
+下から浮かび上がって表示されます。
+
+<Callout>
+`transform` はレイアウト（他の要素の位置）に影響を与えずに動かせるため、
+`margin` などで動かすよりも滑らかでパフォーマンスの良いアニメーションになります。
+</Callout>
+
+## 次の一歩
+
+`@keyframes` に `50%` の状態を追加すると、開始・中間・終了の3段階を
+指定でき、跳ねるような複雑な動きも作れます。

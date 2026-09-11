@@ -1,0 +1,96 @@
+---
+title: Flexboxで横並びのカードを作る
+description: display:flexとgapで、複数のカードをきれいに横並びにする。
+language: html
+kind: web
+difficulty: 中級
+emoji: 📐
+order: 3
+minutes: 5
+starterCode: |
+  <!DOCTYPE html>
+  <html lang="ja">
+  <head>
+    <meta charset="UTF-8" />
+    <style>
+      body {
+        font-family: system-ui, sans-serif;
+        display: grid;
+        place-items: center;
+        min-height: 100vh;
+        margin: 0;
+        background: #fdfbf7;
+      }
+      .row {
+        display: flex;
+        gap: 1rem;
+        flex-wrap: wrap;
+        justify-content: center;
+      }
+      .card {
+        background: #fff;
+        padding: 1rem 1.2rem;
+        border-radius: 12px;
+        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.08);
+        width: 120px;
+        text-align: center;
+      }
+      .card .price { color: #d97706; font-weight: 700; margin-top: 0.3rem; }
+    </style>
+  </head>
+  <body>
+    <div class="row">
+      <div class="card">☕<br />コーヒー<div class="price">¥480</div></div>
+      <div class="card">🍵<br />ほうじ茶<div class="price">¥500</div></div>
+      <div class="card">🍰<br />チーズケーキ<div class="price">¥420</div></div>
+    </div>
+  </body>
+  </html>
+practiceHint: "gapの数値を0.5remや2remに変えて、カード同士の間隔がどう変わるか見てみよう。"
+quiz:
+  question: "子要素を横並びにするための、親要素に指定するCSSプロパティはどれ？"
+  codeSnippet: |
+    .row {
+      ___CHOICE___: flex;
+      gap: 1rem;
+    }
+  options:
+    - label: "display"
+      isCorrect: true
+    - label: "position"
+      isCorrect: false
+    - label: "float"
+      isCorrect: false
+  explanation: "display: flexを親要素に指定すると、その直下の子要素が自動的に横並びになります。positionは要素の配置方法、floatは古い時代の回り込みレイアウト用のプロパティです。"
+---
+
+## 何をしているの？
+
+複数のカードを横に並べたいときは、親要素に `display: flex` を指定します。
+
+```css
+.row {
+  display: flex;
+  gap: 1rem;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+```
+
+- `display: flex` … 直下の子要素を横並びにする
+- `gap` … 子要素どうしの間隔
+- `flex-wrap: wrap` … 画面が狭いときに折り返す
+- `justify-content: center` … 横方向の中央寄せ
+
+以前は横並びのために `float` を駆使する必要がありましたが、
+Flexboxのおかげで **1行書くだけ** で済むようになりました。
+
+<Callout>
+縦方向の揃え位置を変えたいときは `align-items` を使います。
+`justify-content` は「並んでいる向き」、`align-items` は「それと垂直な向き」を揃えます。
+</Callout>
+
+## 次の一歩
+
+`.row` に `flex-direction: column` を追加すると、
+同じHTMLのまま、カードが縦並びに変わります。

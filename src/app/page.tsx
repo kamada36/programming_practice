@@ -1,6 +1,13 @@
 import Link from "next/link";
 import { ArrowRight, Sparkles, Zap, Coffee } from "lucide-react";
-import { LEVELS, getCatalog, levelTone, recipeId, toLessonRow } from "@/lib/mdx";
+import {
+  LEVELS,
+  getCatalog,
+  getCatalogByGenre,
+  levelTone,
+  recipeId,
+  toLessonRow,
+} from "@/lib/mdx";
 import { CategoryCard } from "@/components/CategoryCard";
 import { LessonGroup } from "@/components/LessonGroup";
 import { StampCard } from "@/components/StampCard";
@@ -10,6 +17,7 @@ import { cn } from "@/lib/utils";
 
 export default function HomePage() {
   const catalog = getCatalog();
+  const genreGroups = getCatalogByGenre();
 
   const stampGroups = catalog.map(({ category, recipes }) => ({
     slug: category.slug,
@@ -99,7 +107,7 @@ export default function HomePage() {
         ))}
       </div>
 
-      {/* 言語 */}
+      {/* 言語（ジャンル別） */}
       <section className="pb-4">
         <div className="mb-4 flex items-baseline justify-between gap-3">
           <h2 className="text-lg font-semibold text-foreground sm:text-xl">
@@ -109,19 +117,34 @@ export default function HomePage() {
             全 {totalMenus} 品
           </p>
         </div>
-        <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-3 sm:gap-4">
-          {catalog.map(({ category, recipes, levels }) => (
-            <CategoryCard
-              key={category.slug}
-              category={category}
-              recipeIds={recipes.map(recipeId)}
-              levelCounts={levels.map(({ level, recipes: rs }) => ({
-                slug: level.slug,
-                label: level.difficulty,
-                emoji: level.emoji,
-                count: rs.length,
-              }))}
-            />
+        <div className="space-y-6">
+          {genreGroups.map(({ genre, categories }) => (
+            <div key={genre.slug}>
+              <div className="mb-2.5 flex items-baseline gap-2">
+                <span aria-hidden>{genre.emoji}</span>
+                <h3 className="text-sm font-bold text-foreground">
+                  {genre.label}
+                </h3>
+                <span className="text-xs text-muted-foreground">
+                  {genre.description}
+                </span>
+              </div>
+              <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-3 sm:gap-4">
+                {categories.map(({ category, recipes, levels }) => (
+                  <CategoryCard
+                    key={category.slug}
+                    category={category}
+                    recipeIds={recipes.map(recipeId)}
+                    levelCounts={levels.map(({ level, recipes: rs }) => ({
+                      slug: level.slug,
+                      label: level.difficulty,
+                      emoji: level.emoji,
+                      count: rs.length,
+                    }))}
+                  />
+                ))}
+              </div>
+            </div>
           ))}
         </div>
       </section>
@@ -131,41 +154,50 @@ export default function HomePage() {
         <StampCard groups={stampGroups} />
       </div>
 
-      {/* 言語ごとのメニュー */}
-      {catalog.map(({ category, levels }) => (
-        <section
-          key={category.slug}
-          id={category.slug}
-          className="scroll-mt-24 border-t border-border/60 py-8 sm:py-10"
-        >
-          <h2 className="flex items-center gap-2 text-lg font-semibold text-foreground sm:text-xl">
-            <span className="text-2xl" aria-hidden>
-              {category.emoji}
-            </span>
-            {category.shortLabel}
-          </h2>
-          <p className="mt-1 max-w-md text-sm leading-relaxed text-muted-foreground">
-            {category.description}
+      {/* 言語ごとのメニュー（ジャンル別） */}
+      {genreGroups.map(({ genre, categories }) => (
+        <div key={genre.slug} className="border-t border-border/60 pt-2">
+          <p className="mt-6 flex items-center gap-1.5 text-xs font-bold uppercase tracking-wider text-muted-foreground">
+            <span aria-hidden>{genre.emoji}</span>
+            {genre.label}
           </p>
 
-          <div className="mt-5 space-y-6">
-            {levels.map(({ level, recipes: levelRecipes }) => (
-              <LessonGroup
-                key={level.slug}
-                level={level}
-                lessons={levelRecipes.map((r, i) => toLessonRow(r, i + 1))}
-              />
-            ))}
-          </div>
+          {categories.map(({ category, levels }) => (
+            <section
+              key={category.slug}
+              id={category.slug}
+              className="scroll-mt-24 py-6 sm:py-8"
+            >
+              <h2 className="flex items-center gap-2 text-lg font-semibold text-foreground sm:text-xl">
+                <span className="text-2xl" aria-hidden>
+                  {category.emoji}
+                </span>
+                {category.shortLabel}
+              </h2>
+              <p className="mt-1 max-w-md text-sm leading-relaxed text-muted-foreground">
+                {category.description}
+              </p>
 
-          <Link
-            href={`/${category.slug}/`}
-            className="mt-6 inline-flex items-center gap-1 text-sm font-medium text-accent transition-colors hover:text-accent/80"
-          >
-            {category.shortLabel} のメニューをすべて見る
-            <ArrowRight className="h-3.5 w-3.5" />
-          </Link>
-        </section>
+              <div className="mt-5 space-y-6">
+                {levels.map(({ level, recipes: levelRecipes }) => (
+                  <LessonGroup
+                    key={level.slug}
+                    level={level}
+                    lessons={levelRecipes.map((r, i) => toLessonRow(r, i + 1))}
+                  />
+                ))}
+              </div>
+
+              <Link
+                href={`/${category.slug}/`}
+                className="mt-6 inline-flex items-center gap-1 text-sm font-medium text-accent transition-colors hover:text-accent/80"
+              >
+                {category.shortLabel} のメニューをすべて見る
+                <ArrowRight className="h-3.5 w-3.5" />
+              </Link>
+            </section>
+          ))}
+        </div>
       ))}
 
       {/* サイトの背景・運営者と、静かなブログ導線 */}

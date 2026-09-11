@@ -9,8 +9,10 @@ import type {
 } from "@/types/recipe";
 import {
   CATEGORIES,
+  GENRES,
   LEVELS,
   getCategory,
+  getGenre,
   getLevel,
   levelSlugForDifficulty,
 } from "./catalog";
@@ -19,9 +21,11 @@ import {
 // 既存の import 互換のため、ここからも再エクスポートする。
 export {
   CATEGORIES,
+  GENRES,
   LEVELS,
   LEVEL_TONE,
   getCategory,
+  getGenre,
   getLevel,
   getLevelByDifficulty,
   levelSlugForDifficulty,
@@ -214,6 +218,21 @@ export function getCatalog(): CategoryOutline[] {
   return CATEGORIES.map((c) => getCategoryOutline(c.slug)).filter(
     (o): o is CategoryOutline => !!o && o.recipes.length > 0,
   );
+}
+
+/** 1ジャンル分のカテゴリ目次束。 */
+export interface GenreGroup {
+  genre: (typeof GENRES)[number];
+  categories: CategoryOutline[];
+}
+
+/** カタログをジャンル（フロントエンド／バックエンドなど）別にまとめる。 */
+export function getCatalogByGenre(): GenreGroup[] {
+  const catalog = getCatalog();
+  return GENRES.map((genre) => ({
+    genre,
+    categories: catalog.filter((o) => o.category.genre === genre.slug),
+  })).filter((g) => g.categories.length > 0);
 }
 
 /** 静的生成用の全 [category]/[level]/[slug] 組み合わせ。 */
